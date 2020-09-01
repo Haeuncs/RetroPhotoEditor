@@ -12,6 +12,7 @@ struct LoadingView: View {
     var body: some View {
         VStack {
             NavigationView()
+                .padding(EdgeInsets(top: 1, leading: 1, bottom: 0, trailing: 1))
             HStack {
                 Image("icnSandglass")
                 Spacer()
@@ -19,27 +20,37 @@ struct LoadingView: View {
             }
             .padding(EdgeInsets(top: 30, leading: 41, bottom: 18, trailing: 41))
 
-            HStack(spacing: 1.7) {
-                Color.Retro.darkBlue.edgesIgnoringSafeArea(.all)
-                Color.Retro.darkBlue.edgesIgnoringSafeArea(.all)
-                Color.Retro.darkBlue.edgesIgnoringSafeArea(.all)
+            // TODO: need animation
+            HStack {
+                Spacer()
+                HStack(spacing: 1.7) {
+                    Color.Retro.darkBlue.edgesIgnoringSafeArea(.all)
+                    Color.Retro.darkBlue.edgesIgnoringSafeArea(.all)
+                    Color.Retro.darkBlue.edgesIgnoringSafeArea(.all)
+                }
+                .padding(EdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2))
+                .windowsBorder()
+                Spacer()
             }
-            .padding(EdgeInsets(top: 0, leading: 22, bottom: 0, trailing: 22))
+            .padding(.leading, 22)
+            .padding(.trailing, 22)
             .frame(
                 minWidth: 0,
                 maxWidth: .infinity,
-                maxHeight: 24,
+                maxHeight: 28,
                 alignment: .leading
             )
+
         }
-        .padding(EdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0))
         .frame(
             minWidth: 0,
             maxWidth: .infinity,
             minHeight: 0,
             alignment: .center
         )
+        .padding(.bottom, 30)
         .background(Color.Retro.gray4)
+        .windowsBorder()
     }
 }
 

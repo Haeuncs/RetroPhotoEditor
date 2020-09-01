@@ -23,5 +23,7 @@ extension Color {
         static let darkGreen = Color(UIColor(red: 0/255.0, green: 143/255.0, blue: 143/255.0, alpha: 1))
         static let charcoalGrey = Color(UIColor(red: 68/255.0, green: 60/255.0, blue: 81/255.0, alpha: 1))
         static let greyishPurple = Color(UIColor(red: 132/255.0, green: 126/255.0, blue: 138/255.0, alpha: 1))
+        static let wisteria = Color(UIColor(red: 159/255.0, green: 153/255.0, blue: 168/255.0, alpha: 1))
+
     }
 }

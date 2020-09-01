@@ -17,6 +17,9 @@
 		7D4AD57B24FE848300CCF299 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD57A24FE848300CCF299 /* NavigationView.swift */; };
 		7D4AD57D24FE84AE00CCF299 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD57C24FE84AE00CCF299 /* LoadingView.swift */; };
 		7D4AD58124FE865400CCF299 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD58024FE865400CCF299 /* Color+.swift */; };
+		7DC5EF4F24FE9361005F3901 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */; };
+		7DC5EF5124FE937B005F3901 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5024FE937B005F3901 /* View+.swift */; };
+		7DC5EF5524FE9CB5005F3901 /* WindowsStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5424FE9CB5005F3901 /* WindowsStyleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		7D4AD57A24FE848300CCF299 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		7D4AD57C24FE84AE00CCF299 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7D4AD58024FE865400CCF299 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
+		7DC5EF5024FE937B005F3901 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		7DC5EF5424FE9CB5005F3901 /* WindowsStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowsStyleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +125,7 @@
 			children = (
 				7D4AD57A24FE848300CCF299 /* NavigationView.swift */,
 				7D4AD57C24FE84AE00CCF299 /* LoadingView.swift */,
+				7DC5EF5424FE9CB5005F3901 /* WindowsStyleButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -136,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				7D4AD58024FE865400CCF299 /* Color+.swift */,
+				7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */,
+				7DC5EF5024FE937B005F3901 /* View+.swift */,
 			);
 			path = Utills;
 			sourceTree = "<group>";
@@ -242,8 +251,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D4AD55824FE843500CCF299 /* AppDelegate.swift in Sources */,
+				7DC5EF4F24FE9361005F3901 /* EdgeBorder.swift in Sources */,
 				7D4AD58124FE865400CCF299 /* Color+.swift in Sources */,
 				7D4AD55A24FE843500CCF299 /* SceneDelegate.swift in Sources */,
+				7DC5EF5524FE9CB5005F3901 /* WindowsStyleButton.swift in Sources */,
+				7DC5EF5124FE937B005F3901 /* View+.swift in Sources */,
 				7D4AD57B24FE848300CCF299 /* NavigationView.swift in Sources */,
 				7D4AD57D24FE84AE00CCF299 /* LoadingView.swift in Sources */,
 				7D4AD55C24FE843500CCF299 /* ContentView.swift in Sources */,
