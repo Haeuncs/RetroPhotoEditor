@@ -9,6 +9,10 @@
 import SwiftUI
 
 struct LoadingView: View {
+    @State var currentProgress: Int = 0
+    var maxProgress: Int = 18
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+
     var body: some View {
         VStack {
             NavigationView()
@@ -20,14 +24,24 @@ struct LoadingView: View {
             }
             .padding(EdgeInsets(top: 30, leading: 41, bottom: 18, trailing: 41))
 
-            // TODO: need animation
             HStack {
                 Spacer()
                 HStack(spacing: 1.7) {
-                    Color.Retro.darkBlue.edgesIgnoringSafeArea(.all)
-                    Color.Retro.darkBlue.edgesIgnoringSafeArea(.all)
-                    Color.Retro.darkBlue.edgesIgnoringSafeArea(.all)
+                    ForEach(0..<currentProgress, id: \.self) { index in
+                        Color.Retro.darkBlue.edgesIgnoringSafeArea(.all)
+                    }
+
+                    ForEach(0..<maxProgress - currentProgress, id: \.self) { index in
+                        Color.clear.edgesIgnoringSafeArea(.all)
+                    }
                 }
+                .onReceive(timer) { time in
+                    self.currentProgress += 1
+                    if self.currentProgress == self.maxProgress + 1 {
+                        self.currentProgress = 0
+                    }
+                }
+
                 .padding(EdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2))
                 .windowsBorder()
                 Spacer()
