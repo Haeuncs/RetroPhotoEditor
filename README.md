@@ -1,11 +1,13 @@
 # What it is?
 
-window95 때의 느낌으로 사진을 편집하는 iOS App
+windows95 때의 느낌으로 사진을 편집하는 iOS App
 
 # Design concept
 
-![concept](./DESIGN.png)
+![concept](./Images/DesignConcept.png)
 
+
+![Style guide](./Images/StyleGuide.png)
 # License
 
 - Icon by [Visual Pharm](https://www.iconfinder.com/iconsets/windows8_icons_iconpharm)
