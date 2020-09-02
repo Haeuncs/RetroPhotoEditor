@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,10 +17,15 @@
 		7D4AD57B24FE848300CCF299 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD57A24FE848300CCF299 /* NavigationView.swift */; };
 		7D4AD57D24FE84AE00CCF299 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD57C24FE84AE00CCF299 /* LoadingView.swift */; };
 		7D4AD58124FE865400CCF299 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD58024FE865400CCF299 /* Color+.swift */; };
+		7D88846B24FF5C8D00499DEA /* PhotoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D88846A24FF5C8D00499DEA /* PhotoEditView.swift */; };
+		7D88847124FF88EA00499DEA /* Sliders in Frameworks */ = {isa = PBXBuildFile; productRef = 7D88847024FF88EA00499DEA /* Sliders */; };
+		7D888475250013C900499DEA /* AddEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D888474250013C900499DEA /* AddEffectView.swift */; };
 		7DC5EF4F24FE9361005F3901 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */; };
 		7DC5EF5124FE937B005F3901 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5024FE937B005F3901 /* View+.swift */; };
 		7DC5EF5524FE9CB5005F3901 /* WindowsStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5424FE9CB5005F3901 /* WindowsStyleButton.swift */; };
 		7DC5EF5824FEA07A005F3901 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5724FEA07A005F3901 /* SplashView.swift */; };
+		7DC5EF5B24FEAF91005F3901 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5A24FEAF91005F3901 /* CustomCameraView.swift */; };
+		7DC5EF6424FEB452005F3901 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF6324FEB452005F3901 /* CameraView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,10 +53,14 @@
 		7D4AD57A24FE848300CCF299 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		7D4AD57C24FE84AE00CCF299 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7D4AD58024FE865400CCF299 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		7D88846A24FF5C8D00499DEA /* PhotoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditView.swift; sourceTree = "<group>"; };
+		7D888474250013C900499DEA /* AddEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEffectView.swift; sourceTree = "<group>"; };
 		7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
 		7DC5EF5024FE937B005F3901 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		7DC5EF5424FE9CB5005F3901 /* WindowsStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowsStyleButton.swift; sourceTree = "<group>"; };
 		7DC5EF5724FEA07A005F3901 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		7DC5EF5A24FEAF91005F3901 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
+		7DC5EF6324FEB452005F3901 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D88847124FF88EA00499DEA /* Sliders in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,13 +103,15 @@
 		7D4AD55624FE843500CCF299 /* RetroEditor */ = {
 			isa = PBXGroup;
 			children = (
-				7D4AD57E24FE864100CCF299 /* DesignGuide */,
-				7D4AD55724FE843500CCF299 /* AppDelegate.swift */,
-				7D4AD55924FE843500CCF299 /* SceneDelegate.swift */,
-				7D4AD55B24FE843500CCF299 /* ContentView.swift */,
-				7D4AD55D24FE843700CCF299 /* Assets.xcassets */,
-				7D4AD56224FE843700CCF299 /* LaunchScreen.storyboard */,
 				7D4AD56524FE843700CCF299 /* Info.plist */,
+				7D888474250013C900499DEA /* AddEffectView.swift */,
+				7D4AD55724FE843500CCF299 /* AppDelegate.swift */,
+				7D4AD55B24FE843500CCF299 /* ContentView.swift */,
+				7D88846A24FF5C8D00499DEA /* PhotoEditView.swift */,
+				7D4AD55924FE843500CCF299 /* SceneDelegate.swift */,
+				7D4AD55D24FE843700CCF299 /* Assets.xcassets */,
+				7D4AD57E24FE864100CCF299 /* DesignGuide */,
+				7D4AD56224FE843700CCF299 /* LaunchScreen.storyboard */,
 				7D4AD55F24FE843700CCF299 /* Preview Content */,
 			);
 			path = RetroEditor;
@@ -135,6 +147,7 @@
 		7D4AD57E24FE864100CCF299 /* DesignGuide */ = {
 			isa = PBXGroup;
 			children = (
+				7DC5EF5924FEAF32005F3901 /* Camera */,
 				7DC5EF5624FEA069005F3901 /* Splash */,
 				7D4AD57F24FE864900CCF299 /* Utills */,
 				7D4AD57924FE847200CCF299 /* Component */,
@@ -160,6 +173,15 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
+		7DC5EF5924FEAF32005F3901 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				7DC5EF5A24FEAF91005F3901 /* CustomCameraView.swift */,
+				7DC5EF6324FEB452005F3901 /* CameraView.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -176,6 +198,9 @@
 			dependencies = (
 			);
 			name = RetroEditor;
+			packageProductDependencies = (
+				7D88847024FF88EA00499DEA /* Sliders */,
+			);
 			productName = RetroEditor;
 			productReference = 7D4AD55424FE843500CCF299 /* RetroEditor.app */;
 			productType = "com.apple.product-type.application";
@@ -226,6 +251,9 @@
 				Base,
 			);
 			mainGroup = 7D4AD54B24FE843500CCF299;
+			packageReferences = (
+				7D88846F24FF88EA00499DEA /* XCRemoteSwiftPackageReference "swiftui-sliders" */,
+			);
 			productRefGroup = 7D4AD55524FE843500CCF299 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -263,14 +291,18 @@
 			files = (
 				7D4AD55824FE843500CCF299 /* AppDelegate.swift in Sources */,
 				7DC5EF4F24FE9361005F3901 /* EdgeBorder.swift in Sources */,
+				7DC5EF5B24FEAF91005F3901 /* CustomCameraView.swift in Sources */,
 				7D4AD58124FE865400CCF299 /* Color+.swift in Sources */,
+				7DC5EF6424FEB452005F3901 /* CameraView.swift in Sources */,
 				7D4AD55A24FE843500CCF299 /* SceneDelegate.swift in Sources */,
+				7D88846B24FF5C8D00499DEA /* PhotoEditView.swift in Sources */,
 				7DC5EF5524FE9CB5005F3901 /* WindowsStyleButton.swift in Sources */,
 				7DC5EF5124FE937B005F3901 /* View+.swift in Sources */,
 				7D4AD57B24FE848300CCF299 /* NavigationView.swift in Sources */,
 				7DC5EF5824FEA07A005F3901 /* SplashView.swift in Sources */,
 				7D4AD57D24FE84AE00CCF299 /* LoadingView.swift in Sources */,
 				7D4AD55C24FE843500CCF299 /* ContentView.swift in Sources */,
+				7D888475250013C900499DEA /* AddEffectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +459,7 @@
 				DEVELOPMENT_TEAM = L47YWQ7AFX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RetroEditor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -447,6 +480,7 @@
 				DEVELOPMENT_TEAM = L47YWQ7AFX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RetroEditor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -533,6 +567,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7D88846F24FF88EA00499DEA /* XCRemoteSwiftPackageReference "swiftui-sliders" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spacenation/swiftui-sliders.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7D88847024FF88EA00499DEA /* Sliders */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D88846F24FF88EA00499DEA /* XCRemoteSwiftPackageReference "swiftui-sliders" */;
+			productName = Sliders;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7D4AD54C24FE843500CCF299 /* Project object */;
 }

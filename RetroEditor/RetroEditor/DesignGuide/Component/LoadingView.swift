@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LoadingView: View {
     @State var currentProgress: Int = 0
-    var maxProgress: Int = 18
+    var maxProgress: Int = 10
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
     var body: some View {

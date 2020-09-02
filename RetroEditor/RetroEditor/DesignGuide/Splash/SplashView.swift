@@ -10,7 +10,18 @@ import SwiftUI
 
 struct SplashView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            LoadingView()
+                .padding(.leading, 24)
+                .padding(.trailing, 24)
+        }
+        .frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .center
+        )
+        .background(Color.Retro.darkGreen.edgesIgnoringSafeArea(.all))
     }
 }
 
