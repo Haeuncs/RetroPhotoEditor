@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7D4AD55824FE843500CCF299 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD55724FE843500CCF299 /* AppDelegate.swift */; };
 		7D4AD55A24FE843500CCF299 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD55924FE843500CCF299 /* SceneDelegate.swift */; };
-		7D4AD55C24FE843500CCF299 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD55B24FE843500CCF299 /* ContentView.swift */; };
 		7D4AD55E24FE843700CCF299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D4AD55D24FE843700CCF299 /* Assets.xcassets */; };
 		7D4AD56124FE843700CCF299 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D4AD56024FE843700CCF299 /* Preview Assets.xcassets */; };
 		7D4AD56424FE843700CCF299 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D4AD56224FE843700CCF299 /* LaunchScreen.storyboard */; };
@@ -20,6 +19,9 @@
 		7D88846B24FF5C8D00499DEA /* PhotoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D88846A24FF5C8D00499DEA /* PhotoEditView.swift */; };
 		7D88847124FF88EA00499DEA /* Sliders in Frameworks */ = {isa = PBXBuildFile; productRef = 7D88847024FF88EA00499DEA /* Sliders */; };
 		7D888475250013C900499DEA /* AddEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D888474250013C900499DEA /* AddEffectView.swift */; };
+		7D9C42EB25008ABE008F1E79 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C42EA25008ABE008F1E79 /* SearchBar.swift */; };
+		7D9C42ED250154A9008F1E79 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C42EC250154A8008F1E79 /* PlaceHolder.swift */; };
+		7D9C42EF25015997008F1E79 /* ScrollFrameChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C42EE25015997008F1E79 /* ScrollFrameChange.swift */; };
 		7DC5EF4F24FE9361005F3901 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */; };
 		7DC5EF5124FE937B005F3901 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5024FE937B005F3901 /* View+.swift */; };
 		7DC5EF5524FE9CB5005F3901 /* WindowsStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5424FE9CB5005F3901 /* WindowsStyleButton.swift */; };
@@ -42,7 +44,6 @@
 		7D4AD55424FE843500CCF299 /* RetroEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RetroEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D4AD55724FE843500CCF299 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D4AD55924FE843500CCF299 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7D4AD55B24FE843500CCF299 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7D4AD55D24FE843700CCF299 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D4AD56024FE843700CCF299 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7D4AD56324FE843700CCF299 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,6 +56,9 @@
 		7D4AD58024FE865400CCF299 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		7D88846A24FF5C8D00499DEA /* PhotoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditView.swift; sourceTree = "<group>"; };
 		7D888474250013C900499DEA /* AddEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEffectView.swift; sourceTree = "<group>"; };
+		7D9C42EA25008ABE008F1E79 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		7D9C42EC250154A8008F1E79 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		7D9C42EE25015997008F1E79 /* ScrollFrameChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollFrameChange.swift; sourceTree = "<group>"; };
 		7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
 		7DC5EF5024FE937B005F3901 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		7DC5EF5424FE9CB5005F3901 /* WindowsStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowsStyleButton.swift; sourceTree = "<group>"; };
@@ -104,15 +108,14 @@
 			isa = PBXGroup;
 			children = (
 				7D4AD56524FE843700CCF299 /* Info.plist */,
-				7D888474250013C900499DEA /* AddEffectView.swift */,
 				7D4AD55724FE843500CCF299 /* AppDelegate.swift */,
-				7D4AD55B24FE843500CCF299 /* ContentView.swift */,
-				7D88846A24FF5C8D00499DEA /* PhotoEditView.swift */,
 				7D4AD55924FE843500CCF299 /* SceneDelegate.swift */,
-				7D4AD55D24FE843700CCF299 /* Assets.xcassets */,
+				7D888476250015F600499DEA /* Camera */,
 				7D4AD57E24FE864100CCF299 /* DesignGuide */,
-				7D4AD56224FE843700CCF299 /* LaunchScreen.storyboard */,
+				7D888477250015FD00499DEA /* PhotoEdit */,
 				7D4AD55F24FE843700CCF299 /* Preview Content */,
+				7D8884792500166200499DEA /* Resource */,
+				7DC5EF5624FEA069005F3901 /* Splash */,
 			);
 			path = RetroEditor;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 				7D4AD57A24FE848300CCF299 /* NavigationView.swift */,
 				7D4AD57C24FE84AE00CCF299 /* LoadingView.swift */,
 				7DC5EF5424FE9CB5005F3901 /* WindowsStyleButton.swift */,
+				7D9C42EA25008ABE008F1E79 /* SearchBar.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -148,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				7DC5EF5924FEAF32005F3901 /* Camera */,
-				7DC5EF5624FEA069005F3901 /* Splash */,
 				7D4AD57F24FE864900CCF299 /* Utills */,
 				7D4AD57924FE847200CCF299 /* Component */,
 			);
@@ -161,8 +164,36 @@
 				7D4AD58024FE865400CCF299 /* Color+.swift */,
 				7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */,
 				7DC5EF5024FE937B005F3901 /* View+.swift */,
+				7D9C42EC250154A8008F1E79 /* PlaceHolder.swift */,
+				7D9C42EE25015997008F1E79 /* ScrollFrameChange.swift */,
 			);
 			path = Utills;
+			sourceTree = "<group>";
+		};
+		7D888476250015F600499DEA /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				7DC5EF5A24FEAF91005F3901 /* CustomCameraView.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		7D888477250015FD00499DEA /* PhotoEdit */ = {
+			isa = PBXGroup;
+			children = (
+				7D888474250013C900499DEA /* AddEffectView.swift */,
+				7D88846A24FF5C8D00499DEA /* PhotoEditView.swift */,
+			);
+			path = PhotoEdit;
+			sourceTree = "<group>";
+		};
+		7D8884792500166200499DEA /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				7D4AD55D24FE843700CCF299 /* Assets.xcassets */,
+				7D4AD56224FE843700CCF299 /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		7DC5EF5624FEA069005F3901 /* Splash */ = {
@@ -176,7 +207,6 @@
 		7DC5EF5924FEAF32005F3901 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				7DC5EF5A24FEAF91005F3901 /* CustomCameraView.swift */,
 				7DC5EF6324FEB452005F3901 /* CameraView.swift */,
 			);
 			path = Camera;
@@ -291,17 +321,19 @@
 			files = (
 				7D4AD55824FE843500CCF299 /* AppDelegate.swift in Sources */,
 				7DC5EF4F24FE9361005F3901 /* EdgeBorder.swift in Sources */,
+				7D9C42EF25015997008F1E79 /* ScrollFrameChange.swift in Sources */,
 				7DC5EF5B24FEAF91005F3901 /* CustomCameraView.swift in Sources */,
 				7D4AD58124FE865400CCF299 /* Color+.swift in Sources */,
 				7DC5EF6424FEB452005F3901 /* CameraView.swift in Sources */,
 				7D4AD55A24FE843500CCF299 /* SceneDelegate.swift in Sources */,
 				7D88846B24FF5C8D00499DEA /* PhotoEditView.swift in Sources */,
+				7D9C42EB25008ABE008F1E79 /* SearchBar.swift in Sources */,
+				7D9C42ED250154A9008F1E79 /* PlaceHolder.swift in Sources */,
 				7DC5EF5524FE9CB5005F3901 /* WindowsStyleButton.swift in Sources */,
 				7DC5EF5124FE937B005F3901 /* View+.swift in Sources */,
 				7D4AD57B24FE848300CCF299 /* NavigationView.swift in Sources */,
 				7DC5EF5824FEA07A005F3901 /* SplashView.swift in Sources */,
 				7D4AD57D24FE84AE00CCF299 /* LoadingView.swift in Sources */,
-				7D4AD55C24FE843500CCF299 /* ContentView.swift in Sources */,
 				7D888475250013C900499DEA /* AddEffectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

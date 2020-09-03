@@ -9,15 +9,24 @@
 import SwiftUI
 
 struct NavigationView: View {
+    let closeButtonAction: (() -> Void)?
+    @Binding var isActiveView: Bool
+
+    init(isActiveView: Binding<Bool> = .constant(false), closeButtonAction: (() -> Void)? = nil) {
+        self.closeButtonAction = closeButtonAction
+        self._isActiveView = isActiveView
+    }
+
     var body: some View {
         VStack(alignment: .center) {
             HStack(alignment: .center, spacing: 0, content: {
                 Image("icnFish")
+                    .renderingMode(.template)
+                    .foregroundColor(isActiveView ? Color.white : Color.Retro.darkGray)
                     .frame(width: 26, height: 26, alignment: .center)
-                    .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 0))
                 Spacer()
                 Button(action: {
-                    // TODO: 버튼 이벤트 넣기
+                    closeButtonAction?()
                 }) {
                     Image("icnX")
                     .resizable()
@@ -34,12 +43,14 @@ struct NavigationView: View {
             maxHeight: 44,
             alignment: .center
         )
-        .background(Color.Retro.gray2)
+        .background(isActiveView ? Color.Retro.darkBlue : Color.Retro.gray2)
     }
 }
 
 struct NavigationView_Previews: PreviewProvider {
+    @State static var isActive: Bool = false
+
     static var previews: some View {
-        NavigationView()
+        NavigationView(isActiveView: $isActive)
     }
 }

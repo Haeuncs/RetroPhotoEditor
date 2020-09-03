@@ -9,33 +9,43 @@
 import SwiftUI
 
 struct PhotoEditView: View {
+    @State var isPresented: Bool = false
+    @State var isEffectPresented: Bool = false
+
     var body: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 0) {
-                NavigationView()
-                HStack(spacing:0) {
-                    WindowsStyleButton(imageNamed: "icnFish", text: "Sticker")
-                    WindowsStyleButton(imageNamed: "icnFilter", text: "Filter")
+        ZStack {
+            GeometryReader { geometry in
+                VStack(spacing: 0) {
+                    NavigationView(isActiveView: $isPresented)
+                    HStack(spacing:0) {
+                        WindowsStyleButton(imageNamed: "icnFish", text: "Sticker") {
+                            isEffectPresented.toggle()
+                        }
+                        WindowsStyleButton(imageNamed: "icnFilter", text: "Filter")
+                    }
+                    Spacer()
+                    Image(uiImage: UIImage())
+                        .resizable()
+                        .background(Color.Retro.gray1)
+                        .frame(
+                            width: geometry.size.width - 4,
+                            height: geometry.size.width - 4,
+                            alignment: .center
+                        )
+                    Spacer()
+                    HStack(spacing:0) {
+                        WindowsStyleButton(imageNamed: "icnFish", text: "Sticker")
+                        WindowsStyleButton(imageNamed: "icnFilter", text: "Filter")
+                        WindowsStyleButton(imageNamed: "icnFish", text: "Sticker")
+                        WindowsStyleButton(imageNamed: "icnFilter", text: "Filter")
+                    }
                 }
-                Spacer()
-                Image(uiImage: UIImage())
-                    .resizable()
-                    .background(Color.Retro.gray1)
-                    .frame(
-                        width: geometry.size.width - 4,
-                        height: geometry.size.width - 4,
-                        alignment: .center
-                    )
-                Spacer()
-                HStack(spacing:0) {
-                    WindowsStyleButton(imageNamed: "icnFish", text: "Sticker")
-                    WindowsStyleButton(imageNamed: "icnFilter", text: "Filter")
-                    WindowsStyleButton(imageNamed: "icnFish", text: "Sticker")
-                    WindowsStyleButton(imageNamed: "icnFilter", text: "Filter")
-                }
+                .background(Color.Retro.gray4)
+                .windowsBorder()
             }
-            .background(Color.Retro.gray4)
-            .windowsBorder()
+            if isEffectPresented {
+                AddEffectView()
+            }
         }
     }
 }

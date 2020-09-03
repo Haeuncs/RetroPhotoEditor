@@ -36,12 +36,9 @@ struct StickerCell: View {
 
 struct AddEffectView: View {
 
+    @Environment(\.presentationMode) var presentationMode
+
     @State var scrollPosition = 0.0
-
-    private var symbols = ["keyboard", "hifispeaker.fill", "printer.fill", "tv.fill", "desktopcomputer", "headphones", "tv.music.note", "mic", "plus.bubble", "video"]
-
-    private var colors: [Color] = [.yellow, .purple, .green]
-
     private var gridItemLayout = [
         GridItem(.flexible(), spacing: 0),
         GridItem(.flexible(), spacing: 0),
@@ -50,9 +47,14 @@ struct AddEffectView: View {
         GridItem(.flexible(), spacing: 0)
     ]
 
+    private let lazyVGridId = "AddEffectView_LazyVGrid"
+
     var body: some View {
         VStack(spacing: 0) {
-            NavigationView()
+            NavigationView(closeButtonAction: {
+                presentationMode.wrappedValue.dismiss()
+            })
+            SearchBar()
             GeometryReader { geometry in
                 HStack(spacing: 0) {
                     ScrollView {
@@ -63,13 +65,21 @@ struct AddEffectView: View {
                                         .frame(width: (geometry.size.width - 28) / 5, height: (geometry.size.width - 28)  / 5)
                                 }
                             }
-                            .id("text")
+                            .provideFrameChanges(viewId: lazyVGridId)
+                            .id(lazyVGridId)
                             .onChange(of: scrollPosition) { newScrollPosition in
-                                scrollProxy.scrollTo("text", anchor: UnitPoint(x: 0, y: CGFloat(newScrollPosition)))
+                                scrollProxy.scrollTo(
+                                    lazyVGridId,
+                                    anchor: UnitPoint(x: 0, y: CGFloat(newScrollPosition))
+                                )
                             }
 
                         }
                     }
+                    .handleCurrentScrollRate {
+                        updateCurrentScrollSliderValue($0)
+                    }
+                    .background(Color.Retro.gray4)
                     .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
 
                     VStack(spacing: 0) {
@@ -93,7 +103,25 @@ struct AddEffectView: View {
                     .windowsBorder()
                 }
             }
+        }
+        .windowsBorder()
+        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 500)
+        .clipped()
+        .shadow(color: Color.black.opacity(0.3), radius: 50, x: 0, y: 20)
+    }
+}
 
+extension AddEffectView {
+    /// get current scroll ratio then set position for custom slider
+    private func updateCurrentScrollSliderValue(_ changes: CurrentViewRatio) {
+        if let currentRate = changes[lazyVGridId] {
+            if 0 <= currentRate && currentRate <= 1  {
+                scrollPosition = currentRate
+            } else if currentRate < 0 {
+                scrollPosition = 0
+            } else if currentRate > 1 {
+                scrollPosition = 1
+            }
         }
     }
 }

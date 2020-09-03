@@ -10,6 +10,7 @@ import SwiftUI
 
 extension Color {
     struct Retro {
+        static let darkGray = Color(UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1))
         static let gray1 = Color(UIColor(red: 128/255.0, green: 128/255.0, blue: 128/255.0, alpha: 1))
         static let gray2 = Color(UIColor(red: 169/255.0, green: 169/255.0, blue: 169/255.0, alpha: 1))
         static let gray3 = Color(UIColor(red: 196/255.0, green: 196/255.0, blue: 196/255.0, alpha: 1))

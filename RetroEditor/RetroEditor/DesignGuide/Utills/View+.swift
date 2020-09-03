@@ -28,6 +28,27 @@ extension View {
         .overlay(EmptyView().border(width: 1, edge: .trailing, color: Color.Retro.charcoalGrey))
         .overlay(EmptyView().border(width: 2, edge: .bottom, color: Color.Retro.wisteria))
         .overlay(EmptyView().border(width: 1, edge: .bottom, color: Color.Retro.charcoalGrey))
+    }
 
+    func windowsBorderReverse() -> some View {
+        self
+            .padding(EdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2))
+            .overlay(EmptyView().border(width: 2, edge: .leading, color: Color.Retro.wisteria))
+            .overlay(EmptyView().border(width: 1, edge: .leading, color: Color.Retro.charcoalGrey))
+            .overlay(EmptyView().border(width: 2, edge: .top, color: Color.Retro.wisteria))
+            .overlay(EmptyView().border(width: 1, edge: .top, color: Color.Retro.charcoalGrey))
+            .overlay(EmptyView().border(width: 2, edge: .trailing, color: Color.white))
+            .overlay(EmptyView().border(width: 1, edge: .trailing, color: Color.Retro.gray4))
+            .overlay(EmptyView().border(width: 2, edge: .bottom, color: Color.white))
+            .overlay(EmptyView().border(width: 1, edge: .bottom, color: Color.Retro.gray4))
+
+    }
+}
+
+struct ViewExtension_Previews: PreviewProvider {
+    static var previews: some View {
+        Rectangle()
+            .frame(width: 100, height: 100, alignment: .center)
+            .windowsBorderReverse()
     }
 }
