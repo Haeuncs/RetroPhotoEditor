@@ -44,7 +44,7 @@ struct PhotoEditView: View {
                 .windowsBorder()
             }
             if isEffectPresented {
-                AddEffectView()
+                AddEffectView(isPresented: $isEffectPresented)
             }
         }
     }

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 import Sliders
 
 struct StickerCell: View {
@@ -34,11 +35,22 @@ struct StickerCell: View {
 //    }
 //}
 
+class AddEffectScroll: ObservableObject {
+    @Published var contentSize: CGSize = .zero
+}
+
 struct AddEffectView: View {
 
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var isPresented: Bool
 
     @State var scrollPosition = 0.0
+    @State private var contentOffset: CGPoint = .zero
+
+    var currentScrollContentSize: CGSize = .zero
+    @State var isDrag: Bool = false
+
+    @EnvironmentObject var scroll: AddEffectScroll
+
     private var gridItemLayout = [
         GridItem(.flexible(), spacing: 0),
         GridItem(.flexible(), spacing: 0),
@@ -47,40 +59,42 @@ struct AddEffectView: View {
         GridItem(.flexible(), spacing: 0)
     ]
 
-    private let lazyVGridId = "AddEffectView_LazyVGrid"
+    init(isPresented: Binding<Bool>) {
+        self._isPresented = isPresented
+    }
 
     var body: some View {
         VStack(spacing: 0) {
-            NavigationView(closeButtonAction: {
-                presentationMode.wrappedValue.dismiss()
+            NavigationView(isActiveView: $isPresented, closeButtonAction: {
+                isPresented.toggle()
             })
             SearchBar()
+                .onTapGesture {
+
+                }
             GeometryReader { geometry in
                 HStack(spacing: 0) {
-                    ScrollView {
-                        ScrollViewReader { scrollProxy in
+                    ScrollableView(
+                        $contentOffset,
+                        animationDuration: 0.5,
+                        delegate: self,
+                        isDrag: $isDrag,
+                        content: {
                             LazyVGrid(columns: gridItemLayout, spacing: 0) {
                                 ForEach(0..<100, id: \.self) { index in
                                     StickerCell()
                                         .frame(width: (geometry.size.width - 28) / 5, height: (geometry.size.width - 28)  / 5)
                                 }
                             }
-                            .provideFrameChanges(viewId: lazyVGridId)
-                            .id(lazyVGridId)
-                            .onChange(of: scrollPosition) { newScrollPosition in
-                                scrollProxy.scrollTo(
-                                    lazyVGridId,
-                                    anchor: UnitPoint(x: 0, y: CGFloat(newScrollPosition))
-                                )
-                            }
-
+                        })
+                        .onChange(of: scrollPosition) { newScrollPosition in
+                            updateCurrentScrollOffset(ratio: newScrollPosition, frameHeight: geometry.size.height)
                         }
-                    }
-                    .handleCurrentScrollRate {
-                        updateCurrentScrollSliderValue($0)
-                    }
-                    .background(Color.Retro.gray4)
-                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
+                        .onChange(of: contentOffset) { value in
+                            updateCurrentScrollRate(scrollOffset: value, frameHeight: geometry.size.height)
+                        }
+                        .background(Color.Retro.gray4)
+                        .frame(minWidth: 100, maxWidth: .infinity, maxHeight: .infinity)
 
                     VStack(spacing: 0) {
                         Image("upperThumb")
@@ -111,23 +125,36 @@ struct AddEffectView: View {
     }
 }
 
-extension AddEffectView {
-    /// get current scroll ratio then set position for custom slider
-    private func updateCurrentScrollSliderValue(_ changes: CurrentViewRatio) {
-        if let currentRate = changes[lazyVGridId] {
-            if 0 <= currentRate && currentRate <= 1  {
-                scrollPosition = currentRate
-            } else if currentRate < 0 {
-                scrollPosition = 0
-            } else if currentRate > 1 {
-                scrollPosition = 1
-            }
+extension AddEffectView: ScrollableViewDelegate {
+    func updateContentSize(size: CGSize) {
+        if scroll.contentSize.height != size.height {
+            scroll.contentSize = size
         }
+    }
+}
+
+extension AddEffectView {
+    func updateCurrentScrollRate(scrollOffset: CGPoint, frameHeight: CGFloat) {
+        guard isDrag else {
+            return
+        }
+        let currentScrollRatio = Double(scrollOffset.y/(scroll.contentSize.height - frameHeight))
+        if 0 <= currentScrollRatio && currentScrollRatio <= 1 {
+            scrollPosition = currentScrollRatio
+        } else if currentScrollRatio < 0 {
+            scrollPosition = 0
+        } else {
+            scrollPosition = 1
+        }
+    }
+
+    func updateCurrentScrollOffset(ratio: Double, frameHeight: CGFloat) {
+        contentOffset.y = (scroll.contentSize.height - frameHeight) * CGFloat(ratio)
     }
 }
 
 struct AddEffectView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEffectView()
+        AddEffectView(isPresented: .constant(true))
     }
 }

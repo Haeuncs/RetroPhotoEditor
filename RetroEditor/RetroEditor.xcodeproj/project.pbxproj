@@ -21,7 +21,8 @@
 		7D888475250013C900499DEA /* AddEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D888474250013C900499DEA /* AddEffectView.swift */; };
 		7D9C42EB25008ABE008F1E79 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C42EA25008ABE008F1E79 /* SearchBar.swift */; };
 		7D9C42ED250154A9008F1E79 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C42EC250154A8008F1E79 /* PlaceHolder.swift */; };
-		7D9C42EF25015997008F1E79 /* ScrollFrameChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C42EE25015997008F1E79 /* ScrollFrameChange.swift */; };
+		7D9C42F1250170A2008F1E79 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C42F0250170A2008F1E79 /* TestView.swift */; };
+		7D9C42F325017298008F1E79 /* ScrollableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C42F225017298008F1E79 /* ScrollableView.swift */; };
 		7DC5EF4F24FE9361005F3901 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */; };
 		7DC5EF5124FE937B005F3901 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5024FE937B005F3901 /* View+.swift */; };
 		7DC5EF5524FE9CB5005F3901 /* WindowsStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5424FE9CB5005F3901 /* WindowsStyleButton.swift */; };
@@ -58,7 +59,8 @@
 		7D888474250013C900499DEA /* AddEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEffectView.swift; sourceTree = "<group>"; };
 		7D9C42EA25008ABE008F1E79 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		7D9C42EC250154A8008F1E79 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
-		7D9C42EE25015997008F1E79 /* ScrollFrameChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollFrameChange.swift; sourceTree = "<group>"; };
+		7D9C42F0250170A2008F1E79 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		7D9C42F225017298008F1E79 /* ScrollableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableView.swift; sourceTree = "<group>"; };
 		7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
 		7DC5EF5024FE937B005F3901 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		7DC5EF5424FE9CB5005F3901 /* WindowsStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowsStyleButton.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				7D4AD55F24FE843700CCF299 /* Preview Content */,
 				7D8884792500166200499DEA /* Resource */,
 				7DC5EF5624FEA069005F3901 /* Splash */,
+				7D9C42F0250170A2008F1E79 /* TestView.swift */,
 			);
 			path = RetroEditor;
 			sourceTree = "<group>";
@@ -165,7 +168,7 @@
 				7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */,
 				7DC5EF5024FE937B005F3901 /* View+.swift */,
 				7D9C42EC250154A8008F1E79 /* PlaceHolder.swift */,
-				7D9C42EE25015997008F1E79 /* ScrollFrameChange.swift */,
+				7D9C42F225017298008F1E79 /* ScrollableView.swift */,
 			);
 			path = Utills;
 			sourceTree = "<group>";
@@ -320,13 +323,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D4AD55824FE843500CCF299 /* AppDelegate.swift in Sources */,
+				7D9C42F325017298008F1E79 /* ScrollableView.swift in Sources */,
 				7DC5EF4F24FE9361005F3901 /* EdgeBorder.swift in Sources */,
-				7D9C42EF25015997008F1E79 /* ScrollFrameChange.swift in Sources */,
 				7DC5EF5B24FEAF91005F3901 /* CustomCameraView.swift in Sources */,
 				7D4AD58124FE865400CCF299 /* Color+.swift in Sources */,
 				7DC5EF6424FEB452005F3901 /* CameraView.swift in Sources */,
 				7D4AD55A24FE843500CCF299 /* SceneDelegate.swift in Sources */,
 				7D88846B24FF5C8D00499DEA /* PhotoEditView.swift in Sources */,
+				7D9C42F1250170A2008F1E79 /* TestView.swift in Sources */,
 				7D9C42EB25008ABE008F1E79 /* SearchBar.swift in Sources */,
 				7D9C42ED250154A9008F1E79 /* PlaceHolder.swift in Sources */,
 				7DC5EF5524FE9CB5005F3901 /* WindowsStyleButton.swift in Sources */,
