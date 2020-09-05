@@ -17,7 +17,15 @@ extension View {
     }
 
     // 커스텀한 windowsBorder
-    func windowsBorder() -> some View {
+    func windowsBorder(reverse: Bool = false) -> some View {
+        if reverse {
+            return AnyView(self.windowsBorderReverse())
+        } else {
+            return AnyView(self.windowsBorderDefault())
+        }
+    }
+
+    func windowsBorderDefault() -> some View {
         self
         .padding(EdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2))
         .overlay(EmptyView().border(width: 2, edge: .top, color: Color.white))

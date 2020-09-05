@@ -10,29 +10,80 @@ import SwiftUI
 import GiphyUISDK
 import GiphyCoreSDK
 
+enum MediaType: String, CaseIterable {
+    case stickers = "Stickers"
+    case text = "Text"
+    case gif = "Gif"
+}
+
+struct GifhySearch {
+    var query: String
+    var mediaType: MediaType
+}
+
+//// Giphy 관련 Action 정의
+protocol GiphyGridWrapperViewControllerDelegate {
+    func search(query: String, mediaType: MediaType)
+}
+
+class GifhyEvents: ObservableObject {
+    @Published var gifhySearch: GifhySearch
+
+    init(search: GifhySearch) {
+        gifhySearch = search
+    }
+//
+//    func search(query: String, mediaType: MediaType) {
+//        didSearchWord = query
+//        self.mediaType = mediaType
+//    }
+}
+
 struct GiphyRepresentable: UIViewControllerRepresentable {
+    typealias UIViewControllerType = GiphyGridWrapperViewController
+    @ObservedObject var events: GifhyEvents
+
+    init(events: GifhyEvents) {
+        self.events = events
+    }
+
     func makeUIViewController(context: Context) -> GiphyGridWrapperViewController {
         let giphy = GiphyGridWrapperViewController()
         return giphy
     }
 
-    typealias UIViewControllerType = GiphyGridWrapperViewController
-
-//    func makeCoordinator() -> () {
-//
-//    }
-
-//    func makeUIViewController(context: Context) -> some UIViewController {
-//        let giphy = GiphyViewController()
-//        return giphy
-//    }
-
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        uiViewController.search(gifhySearch: events.gifhySearch)
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, GPHGridDelegate {
+        var parent: GiphyRepresentable
+
+        init(_ parent: GiphyRepresentable) {
+            self.parent = parent
+        }
+        
+        func contentDidUpdate(resultCount: Int) {
+
+        }
+
+        func didSelectMedia(media: GPHMedia, cell: UICollectionViewCell) {
+
+        }
+
 
     }
 }
 
 class GiphyGridWrapperViewController: UIViewController {
+
+    deinit {
+        print("GiphyGridWrapperViewController deinit")
+    }
 
     var gridController: GiphyGridController = {
         let controller = GiphyGridController()
@@ -43,7 +94,7 @@ class GiphyGridWrapperViewController: UIViewController {
         controller.direction = .vertical
 
         // the number of "tracks" is the span count. it represents num columns for vertical grids & num rows for horizontal grids
-        controller.numberOfTracks = 5
+        controller.numberOfTracks = 3
 
         // hide the checkered background for stickers if you'd like (true by default)
 //        controller.showCheckeredBackground = false
@@ -60,10 +111,6 @@ class GiphyGridWrapperViewController: UIViewController {
         super.viewDidLoad()
 
         configureLayout()
-
-        gridController.content = GPHContent.search(withQuery: "Sup", mediaType: .text, language: .english)
-        gridController.update()
-
     }
 
     func configureLayout() {
@@ -77,5 +124,23 @@ class GiphyGridWrapperViewController: UIViewController {
         gridController.view.topAnchor.constraint(equalTo: view.safeTopAnchor).isActive = true
         gridController.view.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).isActive = true
     }
-    
+
+    func search(gifhySearch: GifhySearch) {
+        switch gifhySearch.mediaType {
+        case .stickers:
+            gridController.content = gifhySearch.query.isEmpty
+                ? GPHContent.trending(mediaType: .sticker)
+                : GPHContent.search(withQuery: gifhySearch.query, mediaType: .sticker, language: .english)
+        case .gif:
+            gridController.content = gifhySearch.query.isEmpty
+                ? GPHContent.trending(mediaType: .gif)
+                : GPHContent.search(withQuery: gifhySearch.query, mediaType: .gif, language: .english)
+        case .text:
+            gridController.content = gifhySearch.query.isEmpty
+                ? GPHContent.trending(mediaType: .text)
+                : GPHContent.search(withQuery: gifhySearch.query, mediaType: .text, language: .english)
+        }
+        gridController.update()
+
+    }
 }

@@ -10,6 +10,11 @@ import SwiftUI
 
 struct SearchBar: View {
     @State var name: String = ""
+    @ObservedObject var gifhyEvent: GifhyEvents
+
+    init(events: GifhyEvents) {
+        gifhyEvent = events
+    }
 
     var body: some View {
         HStack(alignment: .center) {
@@ -17,7 +22,17 @@ struct SearchBar: View {
                 .frame(width: 26, height: 26, alignment: .center)
                 .padding(.leading, 12)
                 .padding(.trailing, 12)
-            TextField("Search Item", text: $name)
+            TextField(
+                "Search Item",
+                text: $name,
+                onEditingChanged: { edit in
+                    print("onEditingChanged")
+                },
+                onCommit: {
+                    print("onCommit")
+                    gifhyEvent.gifhySearch.query = name
+
+                })
                 .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.trailing, 12)
         }
@@ -32,9 +47,9 @@ struct SearchBar: View {
         .windowsBorderReverse()
     }
 }
-
-struct SearchBar_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchBar()
-    }
-}
+//
+//struct SearchBar_Previews: PreviewProvider {
+//    static var previews: some View {
+////        SearchBar(events: <#GifhyEvents#>)
+//    }
+//}

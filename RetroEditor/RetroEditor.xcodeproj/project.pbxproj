@@ -32,6 +32,7 @@
 		7DC5EF5824FEA07A005F3901 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5724FEA07A005F3901 /* SplashView.swift */; };
 		7DC5EF5B24FEAF91005F3901 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5A24FEAF91005F3901 /* CustomCameraView.swift */; };
 		7DC5EF6424FEB452005F3901 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF6324FEB452005F3901 /* CameraView.swift */; };
+		7DF32E3225038E28006783F1 /* SwiftUICam in Frameworks */ = {isa = PBXBuildFile; productRef = 7DF32E3125038E28006783F1 /* SwiftUICam */; };
 		D02959288FFDD72FA956A194 /* Pods_RetroEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC5B82D5C42571B1C3170D5A /* Pods_RetroEditor.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 			files = (
 				7D88847124FF88EA00499DEA /* Sliders in Frameworks */,
 				D02959288FFDD72FA956A194 /* Pods_RetroEditor.framework in Frameworks */,
+				7DF32E3225038E28006783F1 /* SwiftUICam in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +275,7 @@
 			name = RetroEditor;
 			packageProductDependencies = (
 				7D88847024FF88EA00499DEA /* Sliders */,
+				7DF32E3125038E28006783F1 /* SwiftUICam */,
 			);
 			productName = RetroEditor;
 			productReference = 7D4AD55424FE843500CCF299 /* RetroEditor.app */;
@@ -327,6 +330,7 @@
 			mainGroup = 7D4AD54B24FE843500CCF299;
 			packageReferences = (
 				7D88846F24FF88EA00499DEA /* XCRemoteSwiftPackageReference "swiftui-sliders" */,
+				7DF32E3025038E28006783F1 /* XCRemoteSwiftPackageReference "SwiftUICam" */,
 			);
 			productRefGroup = 7D4AD55524FE843500CCF299 /* Products */;
 			projectDirPath = "";
@@ -724,6 +728,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		7DF32E3025038E28006783F1 /* XCRemoteSwiftPackageReference "SwiftUICam" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pierreveron/SwiftUICam";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -731,6 +743,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7D88846F24FF88EA00499DEA /* XCRemoteSwiftPackageReference "swiftui-sliders" */;
 			productName = Sliders;
+		};
+		7DF32E3125038E28006783F1 /* SwiftUICam */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7DF32E3025038E28006783F1 /* XCRemoteSwiftPackageReference "SwiftUICam" */;
+			productName = SwiftUICam;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
