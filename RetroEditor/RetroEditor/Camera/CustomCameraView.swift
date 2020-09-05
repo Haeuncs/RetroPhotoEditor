@@ -11,9 +11,11 @@ import SwiftUI
 import AVFoundation
 
 struct CustomCameraView: View {
-
+    @ObservedObject var events = CameraObject()
     @State var image: UIImage?
     @State var didTapCapture: Bool = false
+    @State var presentSticker: Bool = false
+    
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
@@ -25,13 +27,13 @@ struct CustomCameraView: View {
                 VStack() {
                     Spacer()
                     if self.image != nil {
-                        Image(uiImage: self.image ?? UIImage())
+                        Image(uiImage: image ?? UIImage())
                             .resizable()
                             .frame(width: geometry.size.width - 4, height: geometry.size.width - 4, alignment: .center)
                     } else {
                         CameraView(
                             delegate: self,
-                            didTapCapture: self.$didTapCapture
+                            didTapCapture: self.$didTapCapture, events: events
                         )
                             .frame(width: geometry.size.width - 4, height: geometry.size.width - 4, alignment: .center)
                     }
@@ -40,27 +42,34 @@ struct CustomCameraView: View {
                 HStack(spacing:0) {
                     if self.image == nil {
                         WindowsStyleButton(imageNamed: "icnCamera", text: "Capture") {
-                            self.didTapCapture = true
+                            events.didTapCapture = true
+                            print("didTap")
                         }
                     } else {
                         WindowsStyleButton(imageNamed: "icnRetry", text: "Retry") {
-                            self.didTapCapture = false
                             self.image = nil
                         }
-                    }
-                    WindowsStyleButton(imageNamed: "icnPoison", text: "Done")
+                        WindowsStyleButton(imageNamed: "icnPoison", text: "Done") {
+                            presentSticker = !presentSticker
+                        }
+                        .fullScreenCover(isPresented: $presentSticker) {
+                            PhotoEditView(image: self.image!)
+                        }
                         .frame(maxWidth: 100, maxHeight: 62, alignment: .center)
+                    }
                 }
             }
             .background(Color.Retro.gray4)
             .windowsBorder()
         }
+        
     }
 }
 
 extension CustomCameraView: CameraViewDelegate {
     func processedImage(image: UIImage) {
         self.image = image
+        events.didTapCapture = false
     }
 
     func cameraAccessGranted() {

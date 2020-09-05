@@ -1,0 +1,9 @@
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/DeepDiff" "${PODS_CONFIGURATION_BUILD_DIR}/PINCache" "${PODS_CONFIGURATION_BUILD_DIR}/PINOperation" "${PODS_CONFIGURATION_BUILD_DIR}/libwebp" "${PODS_ROOT}/Giphy/GiphySDK"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/DeepDiff/DeepDiff.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/PINCache/PINCache.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/PINOperation/PINOperation.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/libwebp/libwebp.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "DeepDiff" -framework "Foundation" -framework "PINCache" -framework "PINOperation" -framework "UIKit" -framework "libwebp" -weak_framework "UIKit"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES

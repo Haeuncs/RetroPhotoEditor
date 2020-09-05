@@ -39,19 +39,61 @@
 //        GridItem(.flexible(), spacing: 0),
 //        GridItem(.flexible(), spacing: 0)
 //    ]
+//    @State var isDrag: Bool = false
+//    @State var scrollPosition = 0.0
 //
+//    @State private var isPresented = false
 //
 //    var body: some View {
-//            ScrollableView(self.$contentOffset, animationDuration: 0.5) {
-//                LazyVGrid(columns: gridItemLayout, spacing: 0) {
-//                    ForEach(0..<100, id: \.self) { index in
-//                        Rectangle()
-//                            .frame(width: (300) / 5, height: (300) / 5)
-//                    }
-//                }
-//            }, isDrag: <#Binding<Bool>#>
-//            .frame(width: 300, height: 500, alignment: .center)
+//        Button("Present!") {
+//            self.isPresented.toggle()
+//        }
+//        .fullScreenCover(isPresented: $isPresented) {
+//            PhotoEditView()
+//        }
 //    }
+//
+////    var body: some View {
+////        VStack(spacing: 0) {
+////            SearchBar()
+////            GeometryReader { geometry in
+////                HStack(spacing: 0) {
+////                    ScrollableView(self.$contentOffset, animationDuration: 0.5, isDrag: $isDrag) {
+////                        LazyVGrid(columns: gridItemLayout, spacing: 0) {
+////                            ForEach(0..<100, id: \.self) { index in
+////                                StickerCell()
+////                                    .frame(width: (geometry.size.width - 28) / 5, height: (geometry.size.width - 28) / 5)
+////                            }
+////                        }
+////                    }
+////                    VStack(spacing: 0) {
+////                        Image("upperThumb")
+////                            .resizable()
+////                            .frame(width: 28, height: 28, alignment: .center)
+////                        ValueSlider(value: $scrollPosition)
+////                            .valueSliderStyle(
+////                                VerticalValueSliderStyle(
+////                                    track: Rectangle().fill(Color.Retro.gray1).frame(width: 28),
+////                                    thumb: Rectangle().fill(Color.Retro.gray3).windowsBorder().rotationEffect(.degrees(180), anchor: .center),
+////                                    thumbSize: CGSize(width: 28, height: 16)
+////                                )
+////                            )
+////                            .rotationEffect(.degrees(180), anchor: .center)
+////                        Image("lowerThumb")
+////                            .resizable()
+////                            .frame(width: 28, height: 28, alignment: .center)
+////                    }
+////                    .frame(maxWidth: 28, maxHeight: .infinity)
+////                    .windowsBorder()
+////                }
+////            }
+////        }
+////        .windowsBorder()
+////        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 500)
+////        .clipped()
+////        .shadow(color: Color.black.opacity(0.3), radius: 50, x: 0, y: 20)
+////
+////    }
 //}
 //
 //struct TestView_Previews: PreviewProvider {

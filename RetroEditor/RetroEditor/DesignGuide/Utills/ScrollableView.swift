@@ -258,17 +258,6 @@ final class UIScrollViewController<Content: View> : UIViewController, Observable
             self.offset.wrappedValue = CGPoint(x: 1e-10, y: 0.0)  // cannot be CGPoint(x: 0, y: 0)
         }
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-    }
-
     // MARK: - Constraints
     fileprivate func createConstraints() {
         NSLayoutConstraint.activate([

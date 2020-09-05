@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4098AB5263C81E6FBDBEB804 /* Pods_RetroEditorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F9D20E90A2896FE74F0F37 /* Pods_RetroEditorTests.framework */; };
+		7D3897382502AF7B0076AC3B /* ScrollFrameChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3897372502AF7B0076AC3B /* ScrollFrameChanges.swift */; };
 		7D4AD55824FE843500CCF299 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD55724FE843500CCF299 /* AppDelegate.swift */; };
 		7D4AD55A24FE843500CCF299 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD55924FE843500CCF299 /* SceneDelegate.swift */; };
 		7D4AD55E24FE843700CCF299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D4AD55D24FE843700CCF299 /* Assets.xcassets */; };
@@ -16,6 +18,7 @@
 		7D4AD57B24FE848300CCF299 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD57A24FE848300CCF299 /* NavigationView.swift */; };
 		7D4AD57D24FE84AE00CCF299 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD57C24FE84AE00CCF299 /* LoadingView.swift */; };
 		7D4AD58124FE865400CCF299 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD58024FE865400CCF299 /* Color+.swift */; };
+		7D7E03A32503734300F4A75E /* GiphyRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E03A22503734300F4A75E /* GiphyRepresentable.swift */; };
 		7D88846B24FF5C8D00499DEA /* PhotoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D88846A24FF5C8D00499DEA /* PhotoEditView.swift */; };
 		7D88847124FF88EA00499DEA /* Sliders in Frameworks */ = {isa = PBXBuildFile; productRef = 7D88847024FF88EA00499DEA /* Sliders */; };
 		7D888475250013C900499DEA /* AddEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D888474250013C900499DEA /* AddEffectView.swift */; };
@@ -29,6 +32,7 @@
 		7DC5EF5824FEA07A005F3901 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5724FEA07A005F3901 /* SplashView.swift */; };
 		7DC5EF5B24FEAF91005F3901 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF5A24FEAF91005F3901 /* CustomCameraView.swift */; };
 		7DC5EF6424FEB452005F3901 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5EF6324FEB452005F3901 /* CameraView.swift */; };
+		D02959288FFDD72FA956A194 /* Pods_RetroEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC5B82D5C42571B1C3170D5A /* Pods_RetroEditor.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26F2A3BA0D710C7289759452 /* Pods-RetroEditorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RetroEditorTests.debug.xcconfig"; path = "Target Support Files/Pods-RetroEditorTests/Pods-RetroEditorTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3F5CE03B793AF2A8DB1F1FE2 /* Pods-RetroEditorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RetroEditorTests.release.xcconfig"; path = "Target Support Files/Pods-RetroEditorTests/Pods-RetroEditorTests.release.xcconfig"; sourceTree = "<group>"; };
+		4F1E4C784D5D2D7131A0C85A /* Pods-RetroEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RetroEditor.release.xcconfig"; path = "Target Support Files/Pods-RetroEditor/Pods-RetroEditor.release.xcconfig"; sourceTree = "<group>"; };
+		74D1D03DE5AAA1B7FAEE5D4B /* Pods-RetroEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RetroEditor.debug.xcconfig"; path = "Target Support Files/Pods-RetroEditor/Pods-RetroEditor.debug.xcconfig"; sourceTree = "<group>"; };
+		7D3897372502AF7B0076AC3B /* ScrollFrameChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollFrameChanges.swift; sourceTree = "<group>"; };
 		7D4AD55424FE843500CCF299 /* RetroEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RetroEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D4AD55724FE843500CCF299 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D4AD55924FE843500CCF299 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +64,7 @@
 		7D4AD57A24FE848300CCF299 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		7D4AD57C24FE84AE00CCF299 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7D4AD58024FE865400CCF299 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		7D7E03A22503734300F4A75E /* GiphyRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyRepresentable.swift; sourceTree = "<group>"; };
 		7D88846A24FF5C8D00499DEA /* PhotoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditView.swift; sourceTree = "<group>"; };
 		7D888474250013C900499DEA /* AddEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEffectView.swift; sourceTree = "<group>"; };
 		7D9C42EA25008ABE008F1E79 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -67,6 +77,8 @@
 		7DC5EF5724FEA07A005F3901 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		7DC5EF5A24FEAF91005F3901 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
 		7DC5EF6324FEB452005F3901 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		AC5B82D5C42571B1C3170D5A /* Pods_RetroEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RetroEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1F9D20E90A2896FE74F0F37 /* Pods_RetroEditorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RetroEditorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +87,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D88847124FF88EA00499DEA /* Sliders in Frameworks */,
+				D02959288FFDD72FA956A194 /* Pods_RetroEditor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,18 +95,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4098AB5263C81E6FBDBEB804 /* Pods_RetroEditorTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E0F00C5AEB765605240B67D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				74D1D03DE5AAA1B7FAEE5D4B /* Pods-RetroEditor.debug.xcconfig */,
+				4F1E4C784D5D2D7131A0C85A /* Pods-RetroEditor.release.xcconfig */,
+				26F2A3BA0D710C7289759452 /* Pods-RetroEditorTests.debug.xcconfig */,
+				3F5CE03B793AF2A8DB1F1FE2 /* Pods-RetroEditorTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7D4AD54B24FE843500CCF299 = {
 			isa = PBXGroup;
 			children = (
 				7D4AD55624FE843500CCF299 /* RetroEditor */,
 				7D4AD56D24FE843700CCF299 /* RetroEditorTests */,
 				7D4AD55524FE843500CCF299 /* Products */,
+				0E0F00C5AEB765605240B67D /* Pods */,
+				A7B011113057B3CDA4CB8E3F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,6 +196,7 @@
 				7DC5EF5024FE937B005F3901 /* View+.swift */,
 				7D9C42EC250154A8008F1E79 /* PlaceHolder.swift */,
 				7D9C42F225017298008F1E79 /* ScrollableView.swift */,
+				7D3897372502AF7B0076AC3B /* ScrollFrameChanges.swift */,
 			);
 			path = Utills;
 			sourceTree = "<group>";
@@ -186,6 +214,7 @@
 			children = (
 				7D888474250013C900499DEA /* AddEffectView.swift */,
 				7D88846A24FF5C8D00499DEA /* PhotoEditView.swift */,
+				7D7E03A22503734300F4A75E /* GiphyRepresentable.swift */,
 			);
 			path = PhotoEdit;
 			sourceTree = "<group>";
@@ -215,6 +244,15 @@
 			path = Camera;
 			sourceTree = "<group>";
 		};
+		A7B011113057B3CDA4CB8E3F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AC5B82D5C42571B1C3170D5A /* Pods_RetroEditor.framework */,
+				E1F9D20E90A2896FE74F0F37 /* Pods_RetroEditorTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -222,9 +260,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D4AD57324FE843700CCF299 /* Build configuration list for PBXNativeTarget "RetroEditor" */;
 			buildPhases = (
+				8F25C01B92B6D8DE70BC2BCB /* [CP] Check Pods Manifest.lock */,
 				7D4AD55024FE843500CCF299 /* Sources */,
 				7D4AD55124FE843500CCF299 /* Frameworks */,
 				7D4AD55224FE843500CCF299 /* Resources */,
+				9B2DFB98F4F1CC06F14D37BD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -242,6 +282,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D4AD57624FE843700CCF299 /* Build configuration list for PBXNativeTarget "RetroEditorTests" */;
 			buildPhases = (
+				1E507621E9CEB88EA8CFA332 /* [CP] Check Pods Manifest.lock */,
 				7D4AD56624FE843700CCF299 /* Sources */,
 				7D4AD56724FE843700CCF299 /* Frameworks */,
 				7D4AD56824FE843700CCF299 /* Resources */,
@@ -317,11 +358,76 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1E507621E9CEB88EA8CFA332 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RetroEditorTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F25C01B92B6D8DE70BC2BCB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RetroEditor-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B2DFB98F4F1CC06F14D37BD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RetroEditor/Pods-RetroEditor-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RetroEditor/Pods-RetroEditor-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RetroEditor/Pods-RetroEditor-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7D4AD55024FE843500CCF299 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D3897382502AF7B0076AC3B /* ScrollFrameChanges.swift in Sources */,
 				7D4AD55824FE843500CCF299 /* AppDelegate.swift in Sources */,
 				7D9C42F325017298008F1E79 /* ScrollableView.swift in Sources */,
 				7DC5EF4F24FE9361005F3901 /* EdgeBorder.swift in Sources */,
@@ -334,6 +440,7 @@
 				7D9C42EB25008ABE008F1E79 /* SearchBar.swift in Sources */,
 				7D9C42ED250154A9008F1E79 /* PlaceHolder.swift in Sources */,
 				7DC5EF5524FE9CB5005F3901 /* WindowsStyleButton.swift in Sources */,
+				7D7E03A32503734300F4A75E /* GiphyRepresentable.swift in Sources */,
 				7DC5EF5124FE937B005F3901 /* View+.swift in Sources */,
 				7D4AD57B24FE848300CCF299 /* NavigationView.swift in Sources */,
 				7DC5EF5824FEA07A005F3901 /* SplashView.swift in Sources */,
@@ -488,6 +595,7 @@
 		};
 		7D4AD57424FE843700CCF299 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74D1D03DE5AAA1B7FAEE5D4B /* Pods-RetroEditor.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -509,6 +617,7 @@
 		};
 		7D4AD57524FE843700CCF299 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F1E4C784D5D2D7131A0C85A /* Pods-RetroEditor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -530,6 +639,7 @@
 		};
 		7D4AD57724FE843700CCF299 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26F2A3BA0D710C7289759452 /* Pods-RetroEditorTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -552,6 +662,7 @@
 		};
 		7D4AD57824FE843700CCF299 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F5CE03B793AF2A8DB1F1FE2 /* Pods-RetroEditorTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

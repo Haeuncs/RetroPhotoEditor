@@ -9,6 +9,11 @@
 import SwiftUI
 import UIKit
 import AVFoundation
+import Combine
+
+public class CameraObject: ObservableObject {
+    @Published var didTapCapture: Bool = false
+}
 
 public protocol CameraViewDelegate {
     func cameraAccessGranted()
@@ -23,17 +28,19 @@ public struct CameraView: View {
     private var cameraType: AVCaptureDevice.DeviceType
     private var cameraPosition: AVCaptureDevice.Position
     private var didTapCapture: Binding<Bool>
+    @ObservedObject var events: CameraObject
 
-    public init(delegate: CameraViewDelegate? = nil, cameraType: AVCaptureDevice.DeviceType = .builtInWideAngleCamera, cameraPosition: AVCaptureDevice.Position = .back, didTapCapture: Binding<Bool>) {
+    public init(delegate: CameraViewDelegate? = nil, cameraType: AVCaptureDevice.DeviceType = .builtInWideAngleCamera, cameraPosition: AVCaptureDevice.Position = .back, didTapCapture: Binding<Bool>, events: CameraObject) {
         self.delegate = delegate
         self.cameraType = cameraType
         self.cameraPosition = cameraPosition
         self.didTapCapture = didTapCapture
+        self.events = events
 
     }
 
     public var body: some View {
-        PreviewHolder(delegate: delegate, cameraType: cameraType, cameraPosition: cameraPosition, didTapCapture: didTapCapture)
+        PreviewHolder(delegate: delegate, cameraType: cameraType, cameraPosition: cameraPosition, didTapCapture: didTapCapture, events: events)
     }
 }
 
@@ -44,11 +51,23 @@ private class PreviewView: UIView {
     private var captureSession: AVCaptureSession?
     var photoOutput: AVCapturePhotoOutput?
 
+    var didTapCapture: Binding<Bool> {
+        didSet {
+            print("didset didTapCapture")
+        }
+    }
+
     var videoPreviewLayer: AVCaptureVideoPreviewLayer {
         return layer as! AVCaptureVideoPreviewLayer
     }
 
-    init(delegate: CameraViewDelegate? = nil, cameraType: AVCaptureDevice.DeviceType = .builtInWideAngleCamera, cameraPosition: AVCaptureDevice.Position = .back) {
+    init(
+        delegate: CameraViewDelegate? = nil,
+        cameraType: AVCaptureDevice.DeviceType = .builtInWideAngleCamera,
+        cameraPosition: AVCaptureDevice.Position = .back,
+        didTapCapture: Binding<Bool>) {
+        self.didTapCapture = didTapCapture
+
         super.init(frame: .zero)
 
         self.delegate = delegate
@@ -108,9 +127,9 @@ private class PreviewView: UIView {
     }
 
     func didTapRecord() {
+        print("didTapRecord")
         let settings = AVCapturePhotoSettings()
         photoOutput?.capturePhoto(with: settings, delegate: self)
-
     }
 
     required init?(coder: NSCoder) {
@@ -170,6 +189,7 @@ private struct PreviewHolder: UIViewRepresentable {
     private var cameraPosition: AVCaptureDevice.Position
 
     @Binding var didTapCapture: Bool
+    @ObservedObject var events: CameraObject
 
     typealias UIViewType = PreviewView
 
@@ -178,20 +198,23 @@ private struct PreviewHolder: UIViewRepresentable {
         cameraType: AVCaptureDevice.DeviceType = .builtInWideAngleCamera,
         cameraPosition: AVCaptureDevice.Position = .back,
         image: UIImage? = nil,
-        didTapCapture: Binding<Bool>
+        didTapCapture: Binding<Bool>,
+        events: CameraObject
     ) {
         self.delegate = delegate
         self.cameraType = cameraType
         self.cameraPosition = cameraPosition
         self._didTapCapture = didTapCapture
+        self.events = events
     }
 
     func makeUIView(context: UIViewRepresentableContext<PreviewHolder>) -> PreviewView {
-        PreviewView(delegate: delegate, cameraType: cameraType, cameraPosition: cameraPosition)
+        PreviewView(delegate: delegate, cameraType: cameraType, cameraPosition: cameraPosition, didTapCapture: $didTapCapture)
     }
 
     func updateUIView(_ uiView: PreviewView, context: UIViewRepresentableContext<PreviewHolder>) {
-        if didTapCapture {
+        if events.didTapCapture {
+            print("updateUIView")
             uiView.didTapRecord()
         }
     }
