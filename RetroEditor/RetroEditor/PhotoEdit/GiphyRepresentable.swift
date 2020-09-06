@@ -9,6 +9,7 @@
 import SwiftUI
 import GiphyUISDK
 import GiphyCoreSDK
+import SDWebImageSwiftUI
 
 enum MediaType: String, CaseIterable {
     case stickers = "Stickers"
@@ -28,15 +29,47 @@ protocol GiphyGridWrapperViewControllerDelegate {
 
 class GifhyEvents: ObservableObject {
     @Published var gifhySearch: GifhySearch
-
+    @Published var stickers: [Sticker] = []
+    
     init(search: GifhySearch) {
         gifhySearch = search
     }
-//
-//    func search(query: String, mediaType: MediaType) {
-//        didSearchWord = query
-//        self.mediaType = mediaType
-//    }
+
+    func addSticker(urlString: String) {
+        let view = AnimatedImage(url: URL(string: urlString))
+            // Supports options and context, like `.progressiveLoad` for progressive animation loading
+            .onFailure { error in
+                // Error
+            }
+            .resizable() // Resizable like SwiftUI.Image, you must use this modifier or the view will use the image bitmap size
+            .placeholder(UIImage(systemName: "photo")) // Placeholder Image
+            // Supports ViewBuilder as well
+            .placeholder {
+                Circle().foregroundColor(.gray)
+            }
+            .indicator(SDWebImageActivityIndicator.medium) // Activity Indicator
+            .transition(.fade) // Fade Transition
+//            .scaledToFit() // Attention to call it on AnimatedImage, but not `some View` after View Modifier (Swift Protocol Extension method is static dispatched)
+            .resizable()
+            .scaledToFit()
+
+
+        let newSticker = Sticker(view: AnyView(view))
+        stickers.append(newSticker)
+    }
+
+    func removeSticker(id: UUID) {
+        var deleteIndex: Int?
+        for index in 0..<stickers.count {
+            if stickers[index].id == id {
+                deleteIndex = index
+                break
+            }
+        }
+        if let index = deleteIndex {
+            stickers.remove(at: index)
+        }
+    }
 }
 
 struct GiphyRepresentable: UIViewControllerRepresentable {
@@ -49,6 +82,7 @@ struct GiphyRepresentable: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> GiphyGridWrapperViewController {
         let giphy = GiphyGridWrapperViewController()
+        giphy.delegate = context.coordinator
         return giphy
     }
 
@@ -72,7 +106,9 @@ struct GiphyRepresentable: UIViewControllerRepresentable {
         }
 
         func didSelectMedia(media: GPHMedia, cell: UICollectionViewCell) {
-
+            if let webpURL = media.url(rendition: .original, fileType: .gif) {
+                parent.events.addSticker(urlString: webpURL)
+            }
         }
 
 
@@ -85,6 +121,7 @@ class GiphyGridWrapperViewController: UIViewController {
         print("GiphyGridWrapperViewController deinit")
     }
 
+    weak var delegate: GPHGridDelegate?
     var gridController: GiphyGridController = {
         let controller = GiphyGridController()
         // space between cells
@@ -111,6 +148,8 @@ class GiphyGridWrapperViewController: UIViewController {
         super.viewDidLoad()
 
         configureLayout()
+
+        gridController.delegate = delegate
     }
 
     func configureLayout() {

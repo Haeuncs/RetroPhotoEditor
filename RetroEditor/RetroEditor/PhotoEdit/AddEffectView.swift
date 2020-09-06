@@ -78,11 +78,6 @@ struct AddEffectView: View {
         GridItem(.flexible(), spacing: 0)
     ]
 
-    private let lazyVGridId = "AddEffectView_LazyVGrid"
-
-
-//    @State var currentSearch
-
     @ObservedObject var gifhyEvent: GifhyEvents
 
     init(isPresented: Binding<Bool>, events: GifhyEvents) {
@@ -90,10 +85,9 @@ struct AddEffectView: View {
         self.gifhyEvent = events
     }
 
-
     var body: some View {
         VStack(spacing: 0) {
-            NavigationView(closeButtonAction: {
+            NavigationView(isActiveView: $isPresented, closeButtonAction: {
                 isPresented.toggle()
             })
             SearchBar(events: gifhyEvent)
@@ -113,21 +107,6 @@ struct AddEffectView: View {
         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 500)
         .clipped()
         .shadow(color: Color.black.opacity(0.3), radius: 50, x: 0, y: 20)
-    }
-}
-
-extension AddEffectView {
-    /// get current scroll ratio then set position for custom slider
-    private func updateCurrentScrollSliderValue(_ changes: CurrentViewRatio) {
-        if let currentRate = changes[lazyVGridId] {
-            if 0 <= currentRate && currentRate <= 1  {
-                scrollPosition = currentRate
-            } else if currentRate < 0 {
-                scrollPosition = 0
-            } else if currentRate > 1 {
-                scrollPosition = 1
-            }
-        }
     }
 }
 

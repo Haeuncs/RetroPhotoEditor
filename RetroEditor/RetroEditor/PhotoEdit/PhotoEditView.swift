@@ -21,10 +21,11 @@ class ImageSaver: NSObject {
 
 struct Sticker {
     var view: AnyView
-    var point: CGPoint
+    var point: CGPoint = .zero
+    var newPosition: CGPoint = .zero
     var degree: Double = .zero
     var scale: CGFloat = 1
-    var id: UUID
+    var id: UUID = UUID()
 }
 
 struct TestStickerView: View {
@@ -63,117 +64,174 @@ struct TestStickerView: View {
     }
 
     enum Constant {
-//        static var minimumScale: Double = 4
+        static var minimumScale: CGFloat = 0.7
     }
-
-    @Binding var stickers: [Sticker]
-    @State var stickerNewPositions: [CGSize] = []
+    @ObservedObject var gifhyEvent: GifhyEvents
     @GestureState var simultaneousState = SimultaneousState.inactive
+    @Binding var currentSelectedSticker: Sticker?
 
     let magnificationGesture = MagnificationGesture()
     let rotationGesture = RotationGesture(minimumAngleDelta: Angle(degrees: 5))
 
-    init(stickers: Binding<[Sticker]>) {
-        self._stickers = stickers
-        _stickerNewPositions = State(initialValue: [CGSize](repeating: .zero, count: stickers.wrappedValue.count))
+    init(event: GifhyEvents, currentSelectedSticker: Binding<Sticker?>) {
+        self.gifhyEvent = event
+        self._currentSelectedSticker = currentSelectedSticker
     }
 
     func reorderSticker(index: Int) {
-        let currentSticker = stickers.remove(at: index)
-        stickers.append(currentSticker)
-
-        let currentStickerPosition = stickerNewPositions.remove(at: index)
-        stickerNewPositions.append(currentStickerPosition)
+        let currentSticker = gifhyEvent.stickers.remove(at: index)
+        gifhyEvent.stickers.append(currentSticker)
     }
 
     var body: some View {
-
+        // TODO: Improve this code....😭
         ZStack() {
-            ForEach(stickers, id: \.id) { sticker in
-                sticker.view
-                    .scaleEffect(sticker.scale)
-                    .rotationEffect(Angle.degrees(sticker.degree))
-                    .offset(x: sticker.point.x, y: sticker.point.y)
-                    .frame(width: 100, height: 100)
-                    .gesture(
-                        DragGesture()
-                            .onChanged({ (gesture) in
-                                print(sticker)
-                                let test = gesture.translation
-                                print(test)
-                                for index in 0..<stickers.count {
-                                    if stickers[index].id == sticker.id {
-                                        let newPosition = stickerNewPositions[index]
-                                        stickers[index].point = CGPoint(
-                                            x: newPosition.width + gesture.translation.width,
-                                            y: newPosition.height + gesture.translation.height
-                                        )
+            ForEach(gifhyEvent.stickers, id: \.id) { sticker in
+                ZStack() {
+                    sticker.view
+                        .padding(10)
+                        .border(
+                            Color.Retro.gray4.opacity(0.4),
+                            width: (currentSelectedSticker?.id == sticker.id) ? 2 * (1/sticker.scale) : 0
+                        )
 
-                                        reorderSticker(index: index)
-                                        break
-                                    }
-                                }
-                            })
-                            .onEnded { gesture in
-                                for index in 0..<stickers.count {
-                                    if stickers[index].id == sticker.id {
-                                        let newPosition = stickerNewPositions[index]
-                                        stickers[index].point = CGPoint(
-                                            x: newPosition.width + gesture.translation.width,
-                                            y: newPosition.height + gesture.translation.height
-                                        )
-                                        reorderSticker(index: index)
-                                        stickerNewPositions[index] = CGSize(width: stickers[index].point.x, height: stickers[index].point.y)
-                                        break
-                                    }
-                                }
-                            }
-                    )
-                    .gesture(
-                        SimultaneousGesture(magnificationGesture, rotationGesture)
-                            .onChanged({ (value) in
-                                for index in 0..<stickers.count {
-                                    if stickers[index].id == sticker.id {
-                                        stickers[index].scale = value.first ?? 1
-                                        stickers[index].degree = value.second?.degrees ?? .zero
-                                        reorderSticker(index: index)
-                                    }
-                                }
-                            })
-                            .updating($simultaneousState) { value, state, transation in
-                                if value.first != nil && value.second != nil {
-                                    state = .both(angle: value.second!, scale: value.first!)
-                                    print("Both")
-                                } else if value.first != nil {
-                                    state = .zooming(scale: value.first!)
-                                    print("Zoom")
-                                } else if value.second != nil {
-                                    state = .rotating(angle: value.second!)
-                                    print("Rotate")
-                                } else {
-                                    state = .inactive
+                    if currentSelectedSticker?.id == sticker.id {
+                        Button(action: {
+                            gifhyEvent.removeSticker(id: sticker.id)
+                        }) {
+                            Image("icnXEllipse")
+                                .resizable()
+                                .frame(width: 26, height: 26)
+                        }
+                        .frame(width: 26 * (1/sticker.scale), height: 26 * (1/sticker.scale), alignment: .leading)
+                        .position(x: 140, y: 0)
+                    }
+                }
+                .frame(width: 140, height:140)
+                .aspectRatio(contentMode: .fit)
+                .scaleEffect(sticker.scale)
+                .rotationEffect(Angle.degrees(sticker.degree))
+                .offset(x: sticker.point.x, y: sticker.point.y)
+                .onTapGesture {
+                    currentSelectedSticker = sticker
+                }
+                .gesture(
+                    DragGesture()
+                        .onChanged({ (gesture) in
+                            print(sticker)
+                            let test = gesture.translation
+                            print(test)
+                            for index in 0..<gifhyEvent.stickers.count {
+                                if gifhyEvent.stickers[index].id == sticker.id {
+                                    let newPosition = gifhyEvent.stickers[index].newPosition
+                                    gifhyEvent.stickers[index].point = CGPoint(
+                                        x: newPosition.x + gesture.translation.width,
+                                        y: newPosition.y + gesture.translation.height
+                                    )
+                                    reorderSticker(index: index)
+                                    break
                                 }
                             }
-                            .onEnded { value in
-                                for index in 0..<stickers.count {
-                                    if stickers[index].id == sticker.id {
-                                        stickers[index].scale = value.first ?? 1
-                                        stickers[index].degree = value.second?.degrees ?? .zero
-                                        reorderSticker(index: index)
-                                    }
+                        })
+                        .onEnded { gesture in
+                            for index in 0..<gifhyEvent.stickers.count {
+                                if gifhyEvent.stickers[index].id == sticker.id {
+                                    let newPosition = gifhyEvent.stickers[index].newPosition
+                                    gifhyEvent.stickers[index].point = CGPoint(
+                                        x: newPosition.x + gesture.translation.width,
+                                        y: newPosition.y + gesture.translation.height
+                                    )
+                                    reorderSticker(index: index)
+                                    gifhyEvent.stickers[index].newPosition = gifhyEvent.stickers[index].point
+                                    break
                                 }
                             }
-                    )
+                        }
+                )
+                .gesture(
+                    SimultaneousGesture(magnificationGesture, rotationGesture)
+                        .onChanged({ (value) in
+                            for index in 0..<gifhyEvent.stickers.count {
+                                let scale = (Constant.minimumScale <= value.first ?? 1) ? value.first ?? 1 : Constant.minimumScale
+                                if gifhyEvent.stickers[index].id == sticker.id {
+                                    gifhyEvent.stickers[index].scale = scale
+                                    gifhyEvent.stickers[index].degree = value.second?.degrees ?? .zero
+                                    reorderSticker(index: index)
+                                }
+                            }
+                        })
+                        .updating($simultaneousState) { value, state, transation in
+                            if value.first != nil && value.second != nil {
+                                state = .both(angle: value.second!, scale: value.first!)
+                                print("Both")
+                            } else if value.first != nil {
+                                state = .zooming(scale: value.first!)
+                                print("Zoom")
+                            } else if value.second != nil {
+                                state = .rotating(angle: value.second!)
+                                print("Rotate")
+                            } else {
+                                state = .inactive
+                            }
+                        }
+                        .onEnded { value in
+                            for index in 0..<gifhyEvent.stickers.count {
+                                if gifhyEvent.stickers[index].id == sticker.id {
+                                    let scale = (Constant.minimumScale <= value.first ?? 1) ? value.first ?? 1 : Constant.minimumScale
+                                    gifhyEvent.stickers[index].scale = scale
+                                    gifhyEvent.stickers[index].degree = value.second?.degrees ?? .zero
+                                    reorderSticker(index: index)
+                                }
+                            }
+                        }
+                )
             }
         }
         .frame(minWidth: 0,
-                maxWidth: .infinity,
-                minHeight: 0,
-                maxHeight: .infinity,
-                alignment: .topLeading
+               maxWidth: .infinity,
+               minHeight: 0,
+               maxHeight: .infinity,
+               alignment: .topLeading
         )
         .clipped()
 
+    }
+}
+
+extension View {
+    func asImage() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+
+        // locate far out of screen
+        controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
+        UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
+
+        let size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
+        controller.view.bounds = CGRect(origin: .zero, size: size)
+        controller.view.sizeToFit()
+
+        let image = controller.view.asImage()
+        controller.view.removeFromSuperview()
+        return image
+    }
+}
+
+extension UIView {
+    func asImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+// [!!] Uncomment to clip resulting image
+//             rendererContext.cgContext.addPath(
+//                UIBezierPath(roundedRect: bounds, cornerRadius: 20).cgPath)
+//            rendererContext.cgContext.clip()
+
+// As commented by @MaxIsom below in some cases might be needed
+// to make this asynchronously, so uncomment below DispatchQueue
+// if you'd same met crash
+//            DispatchQueue.main.async {
+                 layer.render(in: rendererContext.cgContext)
+//            }
+        }
     }
 }
 
@@ -182,17 +240,58 @@ struct PhotoEditView: View {
 
     @State var isPresented: Bool = false
     @State var isEffectPresented: Bool = false
+    @State var currentSelectedSticker: Sticker? = nil
     var image: UIImage
 
+    @State var testView: AnyView?
     @ObservedObject var gifhyEvent = GifhyEvents(search: GifhySearch(query: "", mediaType: .stickers))
-    @State var stickers: [Sticker] = [
-        Sticker(view: AnyView(Rectangle().fill(Color.Retro.darkGray)), point: .zero, id: UUID()),
-        Sticker(view: AnyView(Rectangle().fill(Color.Retro.darkBlue)), point: .zero, id: UUID()),
-        Sticker(view: AnyView(Rectangle().fill(Color.Retro.darkGreen)), point: .zero, id: UUID())
-    ]
 
     init(image: UIImage) {
         self.image = image
+    }
+
+    func getStickerView(length: CGFloat) -> AnyView {
+        let view = ZStack {
+            Image(uiImage: self.image)
+                .resizable()
+                .background(Color.Retro.gray1)
+                .frame(
+                    width: length,
+                    height: length,
+                    alignment: .center
+                )
+                .onTapGesture {
+                    currentSelectedSticker = nil
+                }
+
+            TestStickerView(
+                event: gifhyEvent,
+                currentSelectedSticker: $currentSelectedSticker
+            )
+            .frame(
+                width: length,
+                height: length,
+                alignment: .center
+            )
+        }
+        .frame(
+            width: length,
+            height: length,
+            alignment: .center
+        )
+        let wrapperView = HStack {
+            view
+        }
+        .frame(
+            width: length,
+            height: length,
+            alignment: .center
+        )
+        .onAppear {
+            testView = AnyView(view)
+        }
+
+        return AnyView(wrapperView)
     }
 
     var body: some View {
@@ -209,35 +308,17 @@ struct PhotoEditView: View {
                         WindowsStyleButton(imageNamed: "icnFilter", text: "Filter")
                     }
                     Spacer()
-                    ZStack {
-                        Image(uiImage: self.image)
-                            .resizable()
-                            .background(Color.Retro.gray1)
-                            .frame(
-                                width: geometry.size.width - 4,
-                                height: geometry.size.width - 4,
-                                alignment: .center
-                            )
-                        TestStickerView(stickers: $stickers)
-                            .frame(
-                                width: geometry.size.width - 4,
-                                height: geometry.size.width - 4,
-                                alignment: .center
-                            )
-                    }
-                    .frame(
-                        width: geometry.size.width - 4,
-                        height: geometry.size.width - 4,
-                        alignment: .center
-                    )
+                    getStickerView(length: geometry.size.width - 4)
                     Spacer()
                     HStack(spacing:0) {
-                        WindowsStyleButton(imageNamed: "icnTrash", text: "Delete All")
-                        WindowsStyleButton(imageNamed: "icnFilter", text: "Filter")
-                        WindowsStyleButton(imageNamed: "icnFish", text: "Sticker")
+                        WindowsStyleButton(imageNamed: "icnTrash", text: "Delete All") {
+                            gifhyEvent.stickers = []
+                        }
                         WindowsStyleButton(imageNamed: "icnDisk", text: "Save") {
-                            let imageSaver = ImageSaver()
-                            imageSaver.writeToPhotoAlbum(image: self.image)
+                            if let view = testView {
+                                let imageSaver = ImageSaver()
+                                imageSaver.writeToPhotoAlbum(image: view.asImage())
+                            }
                         }
                     }
                 }
