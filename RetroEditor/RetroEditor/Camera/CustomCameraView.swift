@@ -33,7 +33,7 @@ struct CustomCameraView: View {
                     } else {
                         CameraView(
                             delegate: self,
-                            didTapCapture: self.$didTapCapture, events: events
+                            events: events
                         )
                             .frame(width: geometry.size.width - 4, height: geometry.size.width - 4, alignment: .center)
                     }

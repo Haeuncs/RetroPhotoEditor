@@ -8,13 +8,34 @@
 
 import SwiftUI
 
+enum ViewScale {
+    case maximize
+    case minimize
+    case none
+}
+
 struct NavigationView: View {
     let closeButtonAction: (() -> Void)?
     @Binding var isActiveView: Bool
+    @Binding var viewScaleOption: ViewScale
 
-    init(isActiveView: Binding<Bool> = .constant(false), closeButtonAction: (() -> Void)? = nil) {
+    init(
+        isActiveView: Binding<Bool> = .constant(false),
+        closeButtonAction: (() -> Void)? = nil
+    ) {
         self.closeButtonAction = closeButtonAction
         self._isActiveView = isActiveView
+        self._viewScaleOption = Binding.constant(.none)
+    }
+
+    init(
+        isActiveView: Binding<Bool> = .constant(false),
+        viewScaleOption: Binding<ViewScale>,
+        closeButtonAction: (() -> Void)? = nil
+    ) {
+        self.closeButtonAction = closeButtonAction
+        self._isActiveView = isActiveView
+        self._viewScaleOption = viewScaleOption
     }
 
     var body: some View {
@@ -25,14 +46,26 @@ struct NavigationView: View {
                     .foregroundColor(isActiveView ? Color.white : Color.Retro.darkGray)
                     .frame(width: 26, height: 26, alignment: .center)
                 Spacer()
-                Button(action: {
-                    closeButtonAction?()
-                }) {
-                    Image("icnX")
-                    .resizable()
-                    .renderingMode(.original)
+                HStack(spacing: 12) {
+                    if viewScaleOption != .none {
+                        Button(action: {
+                            viewScaleOption = (viewScaleOption == .maximize) ? .minimize : .maximize
+                        }) {
+                            Image((viewScaleOption == .minimize) ? "icnMaximize" : "icnMinimize")
+                            .resizable()
+                            .renderingMode(.original)
+                        }
+                        .frame(width: 32, height: 32, alignment: .center)
+                    }
+                    Button(action: {
+                        closeButtonAction?()
+                    }) {
+                        Image("icnX")
+                        .resizable()
+                        .renderingMode(.original)
+                    }
+                    .frame(width: 32, height: 32, alignment: .center)
                 }
-                .frame(width: 32, height: 32, alignment: .center)
             })
             .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
         }

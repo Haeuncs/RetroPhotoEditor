@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4098AB5263C81E6FBDBEB804 /* Pods_RetroEditorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F9D20E90A2896FE74F0F37 /* Pods_RetroEditorTests.framework */; };
+		7D2481602504B25100362CF8 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D24815F2504B25100362CF8 /* UIView+.swift */; };
 		7D3897382502AF7B0076AC3B /* ScrollFrameChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3897372502AF7B0076AC3B /* ScrollFrameChanges.swift */; };
 		7D4AD55824FE843500CCF299 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD55724FE843500CCF299 /* AppDelegate.swift */; };
 		7D4AD55A24FE843500CCF299 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AD55924FE843500CCF299 /* SceneDelegate.swift */; };
@@ -52,6 +53,7 @@
 		3F5CE03B793AF2A8DB1F1FE2 /* Pods-RetroEditorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RetroEditorTests.release.xcconfig"; path = "Target Support Files/Pods-RetroEditorTests/Pods-RetroEditorTests.release.xcconfig"; sourceTree = "<group>"; };
 		4F1E4C784D5D2D7131A0C85A /* Pods-RetroEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RetroEditor.release.xcconfig"; path = "Target Support Files/Pods-RetroEditor/Pods-RetroEditor.release.xcconfig"; sourceTree = "<group>"; };
 		74D1D03DE5AAA1B7FAEE5D4B /* Pods-RetroEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RetroEditor.debug.xcconfig"; path = "Target Support Files/Pods-RetroEditor/Pods-RetroEditor.debug.xcconfig"; sourceTree = "<group>"; };
+		7D24815F2504B25100362CF8 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		7D3897372502AF7B0076AC3B /* ScrollFrameChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollFrameChanges.swift; sourceTree = "<group>"; };
 		7D4AD55424FE843500CCF299 /* RetroEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RetroEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D4AD55724FE843500CCF299 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				7D4AD58024FE865400CCF299 /* Color+.swift */,
+				7D24815F2504B25100362CF8 /* UIView+.swift */,
 				7DC5EF4E24FE9361005F3901 /* EdgeBorder.swift */,
 				7DC5EF5024FE937B005F3901 /* View+.swift */,
 				7D9C42EC250154A8008F1E79 /* PlaceHolder.swift */,
@@ -439,6 +442,7 @@
 				7D4AD55824FE843500CCF299 /* AppDelegate.swift in Sources */,
 				7D9C42F325017298008F1E79 /* ScrollableView.swift in Sources */,
 				7DC5EF4F24FE9361005F3901 /* EdgeBorder.swift in Sources */,
+				7D2481602504B25100362CF8 /* UIView+.swift in Sources */,
 				7DC5EF5B24FEAF91005F3901 /* CustomCameraView.swift in Sources */,
 				7D4AD58124FE865400CCF299 /* Color+.swift in Sources */,
 				7DC5EF6424FEB452005F3901 /* CameraView.swift in Sources */,

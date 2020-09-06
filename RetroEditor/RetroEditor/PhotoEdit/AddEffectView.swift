@@ -68,6 +68,7 @@ struct AddEffectView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @Binding var isPresented: Bool
+    @State var viewScale: ViewScale = .minimize
 
     @State var scrollPosition = 0.0
     private var gridItemLayout = [
@@ -87,7 +88,10 @@ struct AddEffectView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            NavigationView(isActiveView: $isPresented, closeButtonAction: {
+            NavigationView(
+                isActiveView: $isPresented,
+                viewScaleOption: $viewScale,
+                closeButtonAction: {
                 isPresented.toggle()
             })
             SearchBar(events: gifhyEvent)
@@ -104,7 +108,7 @@ struct AddEffectView: View {
             GiphyRepresentable(events: gifhyEvent)
         }
         .windowsBorder()
-        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 500)
+        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: (viewScale == .maximize) ? .infinity : 500)
         .clipped()
         .shadow(color: Color.black.opacity(0.3), radius: 50, x: 0, y: 20)
     }
