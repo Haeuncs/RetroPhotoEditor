@@ -20,9 +20,7 @@
 // THE SOFTWARE.
 
 import Foundation
-import CoreGraphics
 import CoreImage
-import UIKit
 
 public final class ImageRenderer {
   

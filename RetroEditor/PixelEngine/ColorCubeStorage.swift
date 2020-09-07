@@ -21,36 +21,15 @@
 
 import Foundation
 
-public struct FilterFade : Filtering, Equatable, Codable {
+open class ColorCubeStorage {
+    
+  public static let `default` = ColorCubeStorage(filters: [])
+
+  public var filters: [FilterColorCube] = []
   
-  public enum Params {
-    public static let intensity: ParameterRange<Double, FilterShadows> = .init(min: 0, max: 0.5)
+  public init(filters: [FilterColorCube]) {
+    self.filters = filters
   }
-  
-  public var intensity: Double = 0
-  
-  public init() {
-    
-  }
-  
-  public func apply(to image: CIImage, sourceImage: CIImage) -> CIImage {
-    
-    let background = image
-    let foreground = CIFilter(
-      name: "CIConstantColorGenerator",
-      parameters: [kCIInputColorKey : CIColor(red: 1, green: 1, blue: 1, alpha: CGFloat(intensity))]
-      )!
-      .outputImage!
-      .cropped(to: image.extent)
-    
-    let composition = CIFilter(
-      name: "CISourceOverCompositing",
-      parameters: [
-        kCIInputImageKey : foreground,
-        kCIInputBackgroundImageKey : background
-      ])!
-    
-    return composition.outputImage!
-  }
-  
 }
+
+fileprivate class _Dummy {}

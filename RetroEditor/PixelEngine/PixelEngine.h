@@ -2,11 +2,11 @@
 //  PixelEngine.h
 //  PixelEngine
 //
-//  Created by macOS on 7/3/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
+//  Created by muukii on 10/8/18.
+//  Copyright © 2018 muukii. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 //! Project version number for PixelEngine.
 FOUNDATION_EXPORT double PixelEngineVersionNumber;

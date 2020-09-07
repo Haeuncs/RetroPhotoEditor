@@ -30,4 +30,5 @@ public struct ParameterRange<T : Comparable, Target> {
     self.min = min
     self.max = max
   }
+
 }

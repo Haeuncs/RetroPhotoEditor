@@ -20,9 +20,6 @@
 // THE SOFTWARE.
 
 import Foundation
-import CoreGraphics
-import CoreImage
-import UIKit
 
 #if canImport(MetalKit) && !targetEnvironment(simulator)
 import MetalKit
@@ -76,7 +73,7 @@ open class MetalImageView : MTKView, HardwareImageViewType {
     let commandBuffer = commandQueue.makeCommandBuffer()
 
     let bounds = CGRect(
-        origin: .zero,
+      origin: .zero,
       size: drawableSize
     )
 

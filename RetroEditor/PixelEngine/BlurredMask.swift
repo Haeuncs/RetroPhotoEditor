@@ -20,8 +20,6 @@
 // THE SOFTWARE.
 
 import Foundation
-import UIKit
-import CoreGraphics
 
 public struct BlurredMask : GraphicsDrawing {
 

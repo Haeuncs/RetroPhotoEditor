@@ -20,9 +20,6 @@
 // THE SOFTWARE.
 
 import Foundation
-import CoreGraphics
-import CoreImage
-import UIKit
 
 #if os(macOS)
 import AppKit
