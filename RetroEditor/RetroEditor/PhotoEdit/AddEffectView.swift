@@ -79,9 +79,9 @@ struct AddEffectView: View {
         GridItem(.flexible(), spacing: 0)
     ]
 
-    @ObservedObject var gifhyEvent: GifhyEvents
+    @ObservedObject var gifhyEvent: GifhyViewModel
 
-    init(isPresented: Binding<Bool>, events: GifhyEvents) {
+    init(isPresented: Binding<Bool>, events: GifhyViewModel) {
         self._isPresented = isPresented
         self.gifhyEvent = events
     }
@@ -105,6 +105,8 @@ struct AddEffectView: View {
                     }
                 }
             }
+
+            // handler 를 통하면?
             GiphyRepresentable(events: gifhyEvent)
         }
         .windowsBorder()

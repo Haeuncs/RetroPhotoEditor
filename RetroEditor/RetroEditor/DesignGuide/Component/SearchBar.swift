@@ -10,9 +10,9 @@ import SwiftUI
 
 struct SearchBar: View {
     @State var name: String = ""
-    @ObservedObject var gifhyEvent: GifhyEvents
+    @ObservedObject var gifhyEvent: GifhyViewModel
 
-    init(events: GifhyEvents) {
+    init(events: GifhyViewModel) {
         gifhyEvent = events
     }
 

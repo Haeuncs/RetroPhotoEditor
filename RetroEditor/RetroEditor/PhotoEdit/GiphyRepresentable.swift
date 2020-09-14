@@ -27,7 +27,7 @@ protocol GiphyGridWrapperViewControllerDelegate {
     func search(query: String, mediaType: MediaType)
 }
 
-class GifhyEvents: ObservableObject {
+class GifhyViewModel: ObservableObject {
     @Published var gifhySearch: GifhySearch
     @Published var stickers: [Sticker] = []
     
@@ -74,9 +74,9 @@ class GifhyEvents: ObservableObject {
 
 struct GiphyRepresentable: UIViewControllerRepresentable {
     typealias UIViewControllerType = GiphyGridWrapperViewController
-    @ObservedObject var events: GifhyEvents
+    @ObservedObject var events: GifhyViewModel
 
-    init(events: GifhyEvents) {
+    init(events: GifhyViewModel) {
         self.events = events
     }
 

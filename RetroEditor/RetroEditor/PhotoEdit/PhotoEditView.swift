@@ -67,14 +67,14 @@ struct TestStickerView: View {
         static var minimumScale: CGFloat = 0.7
     }
 
-    @ObservedObject var gifhyEvent: GifhyEvents
+    @ObservedObject var gifhyEvent: GifhyViewModel
     @GestureState var simultaneousState = SimultaneousState.inactive
     @Binding var currentSelectedSticker: Sticker?
 
     let magnificationGesture = MagnificationGesture()
     let rotationGesture = RotationGesture(minimumAngleDelta: Angle(degrees: 5))
 
-    init(event: GifhyEvents, currentSelectedSticker: Binding<Sticker?>) {
+    init(event: GifhyViewModel, currentSelectedSticker: Binding<Sticker?>) {
         self.gifhyEvent = event
         self._currentSelectedSticker = currentSelectedSticker
     }
@@ -207,7 +207,7 @@ struct PhotoEditView: View {
     var image: UIImage
 
     @State var testView: AnyView?
-    @ObservedObject var gifhyEvent = GifhyEvents(search: GifhySearch(query: "", mediaType: .stickers))
+    @ObservedObject var gifhyEvent = GifhyViewModel(search: GifhySearch(query: "", mediaType: .stickers))
 
     init(image: UIImage) {
         self.image = image
