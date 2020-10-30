@@ -11,9 +11,9 @@ import SwiftUI
 struct WindowsStyleButton: View {
 
     let action: (() -> Void)?
-    let imageNamed: String
+    let imageNamed: String?
     let text: String
-    init(imageNamed: String, text: String, action: (() -> Void)? = nil) {
+    init(imageNamed: String? = nil, text: String, action: (() -> Void)? = nil) {
         self.imageNamed = imageNamed
         self.text = text
         self.action = action
@@ -26,10 +26,12 @@ struct WindowsStyleButton: View {
             VStack {
                 Spacer()
                 VStack(spacing: 5) {
-                    Image(imageNamed)
-                        .resizable()
-                        .renderingMode(.original)
-                        .frame(width: 26, height: 26, alignment: .center)
+                    if let image = imageNamed {
+                        Image(image)
+                            .resizable()
+                            .renderingMode(.original)
+                            .frame(width: 26, height: 26, alignment: .center)
+                    }
                     Text(text)
                         .font(Font.system(size: 14))
                         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity, alignment: .center)

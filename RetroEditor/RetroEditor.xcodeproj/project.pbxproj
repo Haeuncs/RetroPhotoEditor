@@ -53,8 +53,8 @@
 		7D2C7EFC25054E01000468E0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2C7EFB25054E01000468E0 /* ContentView.swift */; };
 		7D2C7EFE25054E01000468E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D2C7EFD25054E01000468E0 /* Assets.xcassets */; };
 		7D2C7F0125054E01000468E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D2C7F0025054E01000468E0 /* Preview Assets.xcassets */; };
-		7D56020325054E3A00BA0209 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 7D56020225054E3A00BA0209 /* SwiftPackageProductDependency */; };
-		7D56020625054E6100BA0209 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 7D56020525054E6100BA0209 /* SwiftPackageProductDependency */; };
+		7D56020325054E3A00BA0209 /* Sliders in Frameworks */ = {isa = PBXBuildFile; productRef = 7D56020225054E3A00BA0209 /* Sliders */; };
+		7D56020625054E6100BA0209 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7D56020525054E6100BA0209 /* SDWebImageSwiftUI */; };
 		7D5B817E2507C052009D0D02 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5B81672507C052009D0D02 /* CustomCameraView.swift */; };
 		7D5B817F2507C052009D0D02 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5B81692507C052009D0D02 /* SplashView.swift */; };
 		7D5B81802507C052009D0D02 /* AddEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5B816B2507C052009D0D02 /* AddEffectView.swift */; };
@@ -72,6 +72,7 @@
 		7D5B818C2507C052009D0D02 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5B817B2507C052009D0D02 /* SearchBar.swift */; };
 		7D5B818D2507C052009D0D02 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5B817C2507C052009D0D02 /* NavigationView.swift */; };
 		7D5B818E2507C052009D0D02 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5B817D2507C052009D0D02 /* LoadingView.swift */; };
+		7DA14E46254C65A800631B0C /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA14E45254C65A800631B0C /* AlertView.swift */; };
 		7DADB0F1250557CC009ABF7A /* PixelEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DADB0EF250557CC009ABF7A /* PixelEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7DF6A2342505503A00CE9689 /* PixelEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF6A22D2505503A00CE9689 /* PixelEngine.framework */; };
 		7DF6A2352505503A00CE9689 /* PixelEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF6A22D2505503A00CE9689 /* PixelEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -167,6 +168,7 @@
 		7D5B817B2507C052009D0D02 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		7D5B817C2507C052009D0D02 /* NavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		7D5B817D2507C052009D0D02 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		7DA14E45254C65A800631B0C /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		7DADB0EE250557CC009ABF7A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DADB0EF250557CC009ABF7A /* PixelEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PixelEngine.h; sourceTree = "<group>"; };
 		7DD9EBC925055180007781D3 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.16.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
@@ -188,8 +190,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DF6A2342505503A00CE9689 /* PixelEngine.framework in Frameworks */,
-				7D56020625054E6100BA0209 /* BuildFile in Frameworks */,
-				7D56020325054E3A00BA0209 /* BuildFile in Frameworks */,
+				7D56020625054E6100BA0209 /* SDWebImageSwiftUI in Frameworks */,
+				7D56020325054E3A00BA0209 /* Sliders in Frameworks */,
 				2A3934E37CA3708585DCEFAE /* Pods_RetroEditor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,6 +370,7 @@
 				7D5B817B2507C052009D0D02 /* SearchBar.swift */,
 				7D5B817C2507C052009D0D02 /* NavigationView.swift */,
 				7D5B817D2507C052009D0D02 /* LoadingView.swift */,
+				7DA14E45254C65A800631B0C /* AlertView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -461,8 +464,8 @@
 			);
 			name = RetroEditor;
 			packageProductDependencies = (
-				7D56020225054E3A00BA0209 /* SwiftPackageProductDependency */,
-				7D56020525054E6100BA0209 /* SwiftPackageProductDependency */,
+				7D56020225054E3A00BA0209 /* Sliders */,
+				7D56020525054E6100BA0209 /* SDWebImageSwiftUI */,
 			);
 			productName = RetroEditor;
 			productReference = 7D2C7EF625054E01000468E0 /* RetroEditor.app */;
@@ -515,8 +518,8 @@
 			);
 			mainGroup = 7D2C7EED25054E01000468E0;
 			packageReferences = (
-				7D56020125054E3A00BA0209 /* RemoteSwiftPackageReference */,
-				7D56020425054E6100BA0209 /* RemoteSwiftPackageReference */,
+				7D56020125054E3A00BA0209 /* XCRemoteSwiftPackageReference "swiftui-sliders" */,
+				7D56020425054E6100BA0209 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 7D2C7EF725054E01000468E0 /* Products */;
 			projectDirPath = "";
@@ -622,6 +625,7 @@
 				7D5B81872507C052009D0D02 /* ScrollableView.swift in Sources */,
 				7D2C7EFC25054E01000468E0 /* ContentView.swift in Sources */,
 				7D5B817F2507C052009D0D02 /* SplashView.swift in Sources */,
+				7DA14E46254C65A800631B0C /* AlertView.swift in Sources */,
 				7D5B817E2507C052009D0D02 /* CustomCameraView.swift in Sources */,
 				7D5B81852507C052009D0D02 /* EdgeBorder.swift in Sources */,
 				7D5B81822507C052009D0D02 /* GiphyRepresentable.swift in Sources */,
@@ -950,7 +954,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7D56020125054E3A00BA0209 /* RemoteSwiftPackageReference */ = {
+		7D56020125054E3A00BA0209 /* XCRemoteSwiftPackageReference "swiftui-sliders" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/spacenation/swiftui-sliders.git";
 			requirement = {
@@ -958,7 +962,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		7D56020425054E6100BA0209 /* RemoteSwiftPackageReference */ = {
+		7D56020425054E6100BA0209 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
 			requirement = {
@@ -969,14 +973,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7D56020225054E3A00BA0209 /* SwiftPackageProductDependency */ = {
+		7D56020225054E3A00BA0209 /* Sliders */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7D56020125054E3A00BA0209 /* RemoteSwiftPackageReference */;
+			package = 7D56020125054E3A00BA0209 /* XCRemoteSwiftPackageReference "swiftui-sliders" */;
 			productName = Sliders;
 		};
-		7D56020525054E6100BA0209 /* SwiftPackageProductDependency */ = {
+		7D56020525054E6100BA0209 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7D56020425054E6100BA0209 /* RemoteSwiftPackageReference */;
+			package = 7D56020425054E6100BA0209 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */

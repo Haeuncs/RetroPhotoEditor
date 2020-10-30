@@ -10,9 +10,14 @@
 import SwiftUI
 import AVFoundation
 
+class CustomCameraViewModel: ObservableObject {
+    @Published var capturedImage: UIImage?
+}
+
 struct CustomCameraView: View {
     @ObservedObject var events = CameraObject()
-    @State var image: UIImage?
+    @ObservedObject var viewModel = CustomCameraViewModel()
+
     @State var didTapCapture: Bool = false
     @State var presentSticker: Bool = false
     
@@ -26,8 +31,8 @@ struct CustomCameraView: View {
                 }
                 VStack() {
                     Spacer()
-                    if self.image != nil {
-                        Image(uiImage: image ?? UIImage())
+                    if let image = viewModel.capturedImage {
+                        Image(uiImage: image)
                             .resizable()
                             .frame(width: geometry.size.width - 4, height: geometry.size.width - 4, alignment: .center)
                     } else {
@@ -40,20 +45,20 @@ struct CustomCameraView: View {
                     Spacer()
                 }
                 HStack(spacing:0) {
-                    if self.image == nil {
+                    if viewModel.capturedImage == nil {
                         WindowsStyleButton(imageNamed: "icnCamera", text: "Capture") {
                             events.didTapCapture = true
                             print("didTap")
                         }
                     } else {
                         WindowsStyleButton(imageNamed: "icnRetry", text: "Retry") {
-                            self.image = nil
+                            viewModel.capturedImage = nil
                         }
                         WindowsStyleButton(imageNamed: "icnPoison", text: "Done") {
                             presentSticker = !presentSticker
                         }
                         .fullScreenCover(isPresented: $presentSticker) {
-                            PhotoEditView(image: self.image!)
+                            PhotoEditView(image: viewModel.capturedImage!, customCameraViewModel: viewModel)
                         }
                         .frame(maxWidth: 100, maxHeight: 62, alignment: .center)
                     }
@@ -68,7 +73,7 @@ struct CustomCameraView: View {
 
 extension CustomCameraView: CameraViewDelegate {
     func processedImage(image: UIImage) {
-        self.image = image
+        viewModel.capturedImage = image
         events.didTapCapture = false
     }
 
@@ -114,6 +119,6 @@ struct CaptureButtonView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomCameraView(image: nil)
+        CustomCameraView()
     }
 }

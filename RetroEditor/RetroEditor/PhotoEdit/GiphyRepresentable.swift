@@ -36,17 +36,13 @@ class GifhyViewModel: ObservableObject {
     }
 
     func addSticker(urlString: String) {
+        let uuid = UUID()
         let view = AnimatedImage(url: URL(string: urlString))
             // Supports options and context, like `.progressiveLoad` for progressive animation loading
             .onFailure { error in
-                // Error
+                self.removeSticker(id: uuid)
             }
             .resizable() // Resizable like SwiftUI.Image, you must use this modifier or the view will use the image bitmap size
-            .placeholder(UIImage(systemName: "photo")) // Placeholder Image
-            // Supports ViewBuilder as well
-            .placeholder {
-                Circle().foregroundColor(.gray)
-            }
             .indicator(SDWebImageActivityIndicator.medium) // Activity Indicator
             .transition(.fade) // Fade Transition
 //            .scaledToFit() // Attention to call it on AnimatedImage, but not `some View` after View Modifier (Swift Protocol Extension method is static dispatched)
@@ -54,7 +50,7 @@ class GifhyViewModel: ObservableObject {
             .scaledToFit()
 
 
-        let newSticker = Sticker(view: AnyView(view))
+        let newSticker = Sticker(view: AnyView(view), uuid: uuid)
         stickers.append(newSticker)
     }
 

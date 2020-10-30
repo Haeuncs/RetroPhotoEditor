@@ -9,13 +9,22 @@
 import SwiftUI
 
 class ImageSaver: NSObject {
+    @Binding var imageSaveSuccessed: Bool
+
+    init(imageSaveSuccessed: Binding<Bool>) {
+        self._imageSaveSuccessed = imageSaveSuccessed
+    }
+
     func writeToPhotoAlbum(image: UIImage) {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveError), nil)
     }
 
-    // TODO: finish callback
     @objc func saveError(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        print("Save finished!")
+        guard error == nil else {
+            return
+        }
+
+        imageSaveSuccessed = true
     }
 }
 
@@ -25,7 +34,12 @@ struct Sticker {
     var newPosition: CGPoint = .zero
     var degree: Double = .zero
     var scale: CGFloat = 1
-    var id: UUID = UUID()
+    var id: UUID
+
+    init(view:AnyView, uuid: UUID) {
+        self.view = view
+        self.id = uuid
+    }
 }
 
 struct TestStickerView: View {
@@ -201,16 +215,21 @@ struct TestStickerView: View {
 struct PhotoEditView: View {
     @Environment(\.presentationMode) var presentationMode
 
+    @State var imageSaveSuccessed = false
     @State var isPresented: Bool = false
     @State var isEffectPresented: Bool = false
     @State var currentSelectedSticker: Sticker? = nil
+
     var image: UIImage
 
     @State var testView: AnyView?
     @ObservedObject var gifhyEvent = GifhyViewModel(search: GifhySearch(query: "", mediaType: .stickers))
+    @ObservedObject var customCameraViewModel: CustomCameraViewModel
 
-    init(image: UIImage) {
+
+    init(image: UIImage, customCameraViewModel: CustomCameraViewModel) {
         self.image = image
+        self.customCameraViewModel = customCameraViewModel
     }
 
     func getStickerView(length: CGFloat) -> AnyView {
@@ -280,7 +299,7 @@ struct PhotoEditView: View {
                         WindowsStyleButton(imageNamed: "icnDisk", text: "Save") {
                             currentSelectedSticker = nil
                             if let view = testView {
-                                let imageSaver = ImageSaver()
+                                let imageSaver = ImageSaver(imageSaveSuccessed: $imageSaveSuccessed)
                                 imageSaver.writeToPhotoAlbum(image: view.asImage())
                             }
                         }
@@ -292,12 +311,19 @@ struct PhotoEditView: View {
             if isEffectPresented {
                 AddEffectView(isPresented: $isEffectPresented, events: gifhyEvent)
             }
+            if imageSaveSuccessed {
+                AlertView(dismiss: $imageSaveSuccessed, completion: {
+                    presentationMode.wrappedValue.dismiss()
+                    customCameraViewModel.capturedImage = nil
+
+                })
+            }
         }
     }
 }
 
 struct PhotoEditView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoEditView(image: UIImage())
+        PhotoEditView(image: UIImage(), customCameraViewModel: CustomCameraViewModel())
     }
 }
