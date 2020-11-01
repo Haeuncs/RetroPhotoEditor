@@ -9,26 +9,52 @@ import SwiftUI
 
 struct AlertView: View {
     @Binding var dismiss: Bool
-    let completion: (() -> Void)
 
-    init(dismiss: Binding<Bool>, completion: @escaping (()->Void)) {
+    var title: String
+    var leftText: String?
+    var leftCompletion: (()->Void)?
+    var rightText: String?
+    var rightCompletion: (()->Void)?
+
+    init(
+        dismiss: Binding<Bool>,
+        title: String,
+        leftText: String? = nil,
+        leftCompletion: (()->Void)? = nil,
+        rightText: String? = nil,
+        rightCompletion: (()->Void)? = nil
+    ) {
         self._dismiss = dismiss
-        self.completion = completion
+        self.title = title
+        self.leftText = leftText
+        self.leftCompletion = leftCompletion
+        self.rightText = rightText
+        self.rightCompletion = rightCompletion
     }
 
     var body: some View {
         VStack {
             NavigationView(isActiveView: $dismiss, closeButtonAction: {
-                completion()
+                dismiss = false
             })
                 .padding(EdgeInsets(top: 1, leading: 1, bottom: 0, trailing: 1))
             HStack {
-                Text("저장 성공!")
+                Text(title)
             }
             .padding(EdgeInsets(top: 30, leading: 41, bottom: 18, trailing: 41))
 
-            WindowsStyleButton(text: "확인") {
-                completion()
+            HStack {
+                if let leftText = self.leftText {
+                    WindowsStyleButton(text: leftText) {
+                        leftCompletion?()
+                    }
+                }
+
+                if let rightText = self.rightText {
+                    WindowsStyleButton(text: rightText) {
+                        rightCompletion?()
+                    }
+                }
             }
         }
         .frame(

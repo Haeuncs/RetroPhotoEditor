@@ -38,13 +38,12 @@ class GifhyViewModel: ObservableObject {
     func addSticker(urlString: String) {
         let uuid = UUID()
         let view = AnimatedImage(url: URL(string: urlString))
-            // Supports options and context, like `.progressiveLoad` for progressive animation loading
             .onFailure { error in
                 self.removeSticker(id: uuid)
             }
             .resizable() // Resizable like SwiftUI.Image, you must use this modifier or the view will use the image bitmap size
-            .indicator(SDWebImageActivityIndicator.medium) // Activity Indicator
-            .transition(.fade) // Fade Transition
+            .indicator(SDWebImageActivityIndicator.medium)
+            .transition(.fade)
 //            .scaledToFit() // Attention to call it on AnimatedImage, but not `some View` after View Modifier (Swift Protocol Extension method is static dispatched)
             .resizable()
             .scaledToFit()
@@ -91,6 +90,10 @@ struct GiphyRepresentable: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, GPHGridDelegate {
+        func didSelectMoreByYou(query: String) {
+
+        }
+
         var parent: GiphyRepresentable
 
         init(_ parent: GiphyRepresentable) {

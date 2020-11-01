@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PixelEngine
 
 class ImageSaver: NSObject {
     @Binding var imageSaveSuccessed: Bool
@@ -220,15 +221,16 @@ struct PhotoEditView: View {
     @State var isEffectPresented: Bool = false
     @State var currentSelectedSticker: Sticker? = nil
 
-    var image: UIImage
+    @State var image: UIImage
 
     @State var testView: AnyView?
+    @State var testRect: CGRect = .zero
     @ObservedObject var gifhyEvent = GifhyViewModel(search: GifhySearch(query: "", mediaType: .stickers))
     @ObservedObject var customCameraViewModel: CustomCameraViewModel
 
 
     init(image: UIImage, customCameraViewModel: CustomCameraViewModel) {
-        self.image = image
+        self._image = State(initialValue: image)
         self.customCameraViewModel = customCameraViewModel
     }
 
@@ -287,10 +289,25 @@ struct PhotoEditView: View {
                         WindowsStyleButton(imageNamed: "icnFish", text: "Sticker") {
                             self.isEffectPresented.toggle()
                         }
-                        WindowsStyleButton(imageNamed: "icnFilter", text: "Filter")
+                        WindowsStyleButton(imageNamed: "icnFilter", text: "Filter") {
+                            if let view = testView, let image = CIImage(image: view.asImage()) {
+                                let lutImage = UIImage(named: "film_default")!
+                                let filter = FilterColorCube(
+                                  name: "Filter",
+                                  identifier: "1",
+                                  lutImage: lutImage,
+                                  dimension: 64
+                                )
+
+                                let preview = PreviewFilterColorCube(sourceImage: image, filter: filter)
+
+                                self.image = UIImage(cgImage: preview.cgImage)
+                            }
+                        }
                     }
                     Spacer()
-                    getStickerView(length: geometry.size.width - 4)
+                        getStickerView(length: geometry.size.width - 4)
+                            .background(RectSettings(rect: $testRect))
                     Spacer()
                     HStack(spacing:0) {
                         WindowsStyleButton(imageNamed: "icnTrash", text: "Delete All") {
@@ -298,9 +315,9 @@ struct PhotoEditView: View {
                         }
                         WindowsStyleButton(imageNamed: "icnDisk", text: "Save") {
                             currentSelectedSticker = nil
-                            if let view = testView {
+                            if let image = UIApplication.shared.windows[0].rootViewController?.presentedViewController?.view.setImage(rect: self.testRect) {
                                 let imageSaver = ImageSaver(imageSaveSuccessed: $imageSaveSuccessed)
-                                imageSaver.writeToPhotoAlbum(image: view.asImage())
+                                imageSaver.writeToPhotoAlbum(image: image)
                             }
                         }
                     }
@@ -309,14 +326,13 @@ struct PhotoEditView: View {
                 .windowsBorder()
             }
             if isEffectPresented {
-                AddEffectView(isPresented: $isEffectPresented, events: gifhyEvent)
+//                AddEffectView(isPresented: $isEffectPresented, events: gifhyEvent)
             }
             if imageSaveSuccessed {
-                AlertView(dismiss: $imageSaveSuccessed, completion: {
+                AlertView(dismiss: $imageSaveSuccessed, title: "저장 성공", leftText: "완료", leftCompletion: {
                     presentationMode.wrappedValue.dismiss()
                     customCameraViewModel.capturedImage = nil
-
-                })
+                }, rightText: nil, rightCompletion: nil)
             }
         }
     }

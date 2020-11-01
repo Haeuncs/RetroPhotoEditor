@@ -116,9 +116,9 @@ struct CaptureButtonView: View {
         }
     }
 }
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomCameraView()
-    }
-}
+//
+//struct SwiftUIView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CustomCameraView()
+//    }
+//}

@@ -1,12 +1,39 @@
-////
-////  ContentView.swift
-////  RetroEditor
-////
-////  Created by LEE HAEUN on 2020/09/07.
-////
 //
-//import SwiftUI
-//import PixelEngine
+//  ContentView.swift
+//  RetroEditor
+//
+//  Created by LEE HAEUN on 2020/09/07.
+//
+
+import SwiftUI
+import PixelEngine
+
+struct RectSettings: View {
+    @Binding var rect: CGRect
+
+    var body: some View {
+        GeometryReader { geometry in
+            self.setView(proxy: geometry)
+        }
+    }
+
+    func setView(proxy: GeometryProxy) -> some View {
+        DispatchQueue.main.async {
+            self.rect = proxy.frame(in: .global)
+        }
+        return Rectangle().fill(Color.clear)
+    }
+}
+
+extension UIView {
+    func setImage(rect: CGRect) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: rect)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
+}
+
 //
 //class test: ObservableObject {
 //    @Published var filteredImage: CGImage? = nil
