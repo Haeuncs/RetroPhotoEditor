@@ -20,13 +20,23 @@ struct CustomCameraView: View {
 
     @State var didTapCapture: Bool = false
     @State var presentSticker: Bool = false
+    @State var didTapAlbum: Bool = false
+
+    @State var didSelectedImage: Image?
     
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 NavigationView()
                 HStack(spacing:0) {
-                    WindowsStyleButton(imageNamed: "icnAlbum", text: "Open Album")
+                    WindowsStyleButton(imageNamed: "icnAlbum", text: "Open Album") {
+                        self.didTapAlbum = true
+                    }
+                    .sheet(isPresented: $didTapAlbum) {
+                        ImagePicker() { image in
+                            viewModel.capturedImage = image
+                        }
+                    }
                     WindowsStyleButton(imageNamed: "icnCrop", text: "Ratio")
                 }
                 VStack() {
@@ -67,7 +77,6 @@ struct CustomCameraView: View {
             .background(Color.Retro.gray4)
             .windowsBorder()
         }
-        
     }
 }
 

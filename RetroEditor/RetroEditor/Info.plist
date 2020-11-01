@@ -33,6 +33,10 @@
 	<array>
 		<string>armv7</string>
 	</array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string> photos description.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>camera description.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

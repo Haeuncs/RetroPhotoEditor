@@ -326,7 +326,7 @@ struct PhotoEditView: View {
                 .windowsBorder()
             }
             if isEffectPresented {
-//                AddEffectView(isPresented: $isEffectPresented, events: gifhyEvent)
+                AddEffectView(isPresented: $isEffectPresented, events: gifhyEvent)
             }
             if imageSaveSuccessed {
                 AlertView(dismiss: $imageSaveSuccessed, title: "저장 성공", leftText: "완료", leftCompletion: {

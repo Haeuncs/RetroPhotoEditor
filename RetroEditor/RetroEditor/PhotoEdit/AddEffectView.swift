@@ -29,17 +29,46 @@ struct StickerCell: View {
 }
 
 
-//struct StickerCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        StickerCell()
-//    }
-//}
+struct StickerCell_Previews: PreviewProvider {
+    static var previews: some View {
+        StickerCell()
+    }
+}
 
+struct StickerTypeButton: View {
+    var isSelected: Bool
+    var text: String
+    var completion: (() ->Void)
+    init(text: String, isSelected: Bool, completion: @escaping () -> Void) {
+        self.text = text
+        self.isSelected = isSelected
+        self.completion = completion
+    }
+
+    var body: some View {
+        Button(action: {
+            completion()
+        }) {
+            Text(text)
+        }
+        .frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 42,
+            maxHeight: 42,
+            alignment: .center
+        )
+        .background(isSelected ? Color.Retro.gray3 : Color.Retro.gray4)
+        .windowsBorder(reverse: isSelected)
+
+    }
+}
 struct AddEffectView: View {
 
     @Environment(\.presentationMode) var presentationMode
 
     @Binding var isPresented: Bool
+    @State var viewScale: ViewScale = .minimize
 
     @State var scrollPosition = 0.0
     private var gridItemLayout = [
@@ -50,92 +79,45 @@ struct AddEffectView: View {
         GridItem(.flexible(), spacing: 0)
     ]
 
-    private let lazyVGridId = "AddEffectView_LazyVGrid"
+    @ObservedObject var gifhyEvent: GifhyViewModel
 
-    init(isPresented: Binding<Bool>) {
+    init(isPresented: Binding<Bool>, events: GifhyViewModel) {
         self._isPresented = isPresented
+        self.gifhyEvent = events
     }
-
 
     var body: some View {
         VStack(spacing: 0) {
-            NavigationView(closeButtonAction: {
+            NavigationView(
+                isActiveView: $isPresented,
+                viewScaleOption: $viewScale,
+                closeButtonAction: {
                 isPresented.toggle()
             })
-//            SearchBar()
-            GeometryReader { geometry in
-                HStack(spacing: 0) {
-                    ScrollView {
-                        ScrollViewReader { scrollProxy in
-                            LazyVGrid(columns: gridItemLayout, spacing: 0) {
-                                ForEach(0..<100, id: \.self) { index in
-                                    StickerCell()
-                                        .frame(width: (geometry.size.width - 28) / 5, height: (geometry.size.width - 28)  / 5)
-                                }
-                            }
-                            .provideFrameChanges(viewId: lazyVGridId)
-                            .id(lazyVGridId)
-                            .onChange(of: scrollPosition) { newScrollPosition in
-                                scrollProxy.scrollTo(
-                                    lazyVGridId,
-                                    anchor: UnitPoint(x: 0, y: CGFloat(newScrollPosition))
-                                )
-                            }
-
-                        }
+            SearchBar(events: gifhyEvent)
+            HStack(spacing: 0) {
+                ForEach(MediaType.allCases, id: \.self) { type in
+                    StickerTypeButton(
+                        text: type.rawValue,
+                        isSelected: type == gifhyEvent.gifhySearch.mediaType
+                    ) {
+                        gifhyEvent.gifhySearch.mediaType = type
                     }
-                    .handleCurrentScrollRate {
-                        updateCurrentScrollSliderValue($0)
-                    }
-                    .background(Color.Retro.gray4)
-                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
-
-                    VStack(spacing: 0) {
-                        Image("upperThumb")
-                            .resizable()
-                            .frame(width: 28, height: 28, alignment: .center)
-                        ValueSlider(value: $scrollPosition)
-                            .valueSliderStyle(
-                                VerticalValueSliderStyle(
-                                    track: Rectangle().fill(Color.Retro.gray1).frame(width: 28),
-                                    thumb: Rectangle().fill(Color.Retro.gray3).windowsBorder().rotationEffect(.degrees(180), anchor: .center),
-                                    thumbSize: CGSize(width: 28, height: 16)
-                                )
-                            )
-                            .rotationEffect(.degrees(180), anchor: .center)
-                        Image("lowerThumb")
-                            .resizable()
-                            .frame(width: 28, height: 28, alignment: .center)
-                    }
-                    .frame(maxWidth: 28, maxHeight: .infinity)
-                    .windowsBorder()
                 }
             }
+
+            // handler 를 통하면?
+            GiphyRepresentable(events: gifhyEvent)
         }
         .windowsBorder()
-        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 500)
+        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: (viewScale == .maximize) ? .infinity : 500)
         .clipped()
         .shadow(color: Color.black.opacity(0.3), radius: 50, x: 0, y: 20)
     }
 }
 
-extension AddEffectView {
-    /// get current scroll ratio then set position for custom slider
-    private func updateCurrentScrollSliderValue(_ changes: CurrentViewRatio) {
-        if let currentRate = changes[lazyVGridId] {
-            if 0 <= currentRate && currentRate <= 1  {
-                scrollPosition = currentRate
-            } else if currentRate < 0 {
-                scrollPosition = 0
-            } else if currentRate > 1 {
-                scrollPosition = 1
-            }
-        }
-    }
-}
-
-struct AddEffectView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddEffectView(isPresented: .constant(true))
-    }
-}
+//struct AddEffectView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddEffectView(isPresented: .constant(true), events: GifhySearch(query: "", mediaType: .stickers))
+//    }
+//}
