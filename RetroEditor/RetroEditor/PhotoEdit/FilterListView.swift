@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct FilterListView: View {
+    private var symbols = ["keyboard", "hifispeaker.fill", "printer.fill", "tv.fill", "desktopcomputer", "headphones", "tv.music.note", "mic", "plus.bubble", "video"]
+    private var gridItemLayout = [GridItem(.fixed(90))]
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView(.horizontal) {
+            LazyHGrid(rows: gridItemLayout, spacing: 20) {
+                ForEach(symbols, id: \.self) { item in
+                    Text(item)
+                }
+            }
+        }
+        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 90)
     }
 }
 
