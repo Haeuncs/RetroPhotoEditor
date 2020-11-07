@@ -10,21 +10,24 @@ import SwiftUI
 struct FilterCell: View {
     var body: some View {
         VStack(spacing: 0) {
-            Image("icnFish")
-                .resizable()
-                .padding(EdgeInsets(
-                            top: 13,
-                            leading: 13,
-                            bottom: 13,
-                            trailing: 13
-                ))
+            HStack {
+                Image("icnFish")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(EdgeInsets(
+                        top: 10,
+                        leading: 10,
+                        bottom: 10,
+                        trailing: 10
+                    ))
+            }
             HStack {
                 Text("test")
             }
             .frame(
                 maxWidth: .infinity,
                 minHeight: 0,
-                maxHeight: .infinity,
+                maxHeight: 20,
                 alignment: .center
             )
             .windowsBorder(reverse: true)
