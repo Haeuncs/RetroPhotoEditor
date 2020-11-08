@@ -56,6 +56,8 @@ struct FilterListView: View {
         static let length: CGFloat = 90
     }
 
+    var completion: (() ->Void)
+
     var body: some View {
         ScrollView(.horizontal) {
             LazyHGrid(rows: [Constant.gridItem], spacing: 0) {
@@ -73,9 +75,9 @@ struct FilterListView: View {
         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 90)
     }
 }
-
-struct FilterListView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilterListView()
-    }
-}
+//
+//struct FilterListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FilterListView()
+//    }
+//}

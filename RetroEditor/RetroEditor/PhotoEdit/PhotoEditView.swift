@@ -292,19 +292,6 @@ struct PhotoEditView: View {
                         }
                         WindowsStyleButton(imageNamed: "icnFilter", text: "Filter") {
                             isFilterSelected.toggle()
-//                            if let view = testView, let image = CIImage(image: view.asImage()) {
-//                                let lutImage = UIImage(named: "film_default")!
-//                                let filter = FilterColorCube(
-//                                  name: "Filter",
-//                                  identifier: "1",
-//                                  lutImage: lutImage,
-//                                  dimension: 64
-//                                )
-//
-//                                let preview = PreviewFilterColorCube(sourceImage: image, filter: filter)
-//
-//                                self.image = UIImage(cgImage: preview.cgImage)
-//                            }
                         }
                     }
                     Spacer()
@@ -312,7 +299,22 @@ struct PhotoEditView: View {
                             .background(RectSettings(rect: $testRect))
                     Spacer()
                     if isFilterSelected {
-                        FilterListView()
+                        FilterListView() {
+                            if let view = testView, let image = CIImage(image: view.asImage()) {
+                                let lutImage = UIImage(named: "film_default")!
+                                let filter = FilterColorCube(
+                                    name: "Filter",
+                                    identifier: "1",
+                                    lutImage: lutImage,
+                                    dimension: 64
+                                )
+
+                                let preview = PreviewFilterColorCube(sourceImage: image, filter: filter)
+
+                                self.image = UIImage(cgImage: preview.cgImage)
+                            }
+
+                        }
                     }
                     HStack(spacing:0) {
                         WindowsStyleButton(imageNamed: "icnTrash", text: "Delete All") {
