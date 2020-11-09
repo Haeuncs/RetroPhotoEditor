@@ -68,6 +68,9 @@ struct FilterListView: View {
                             height: Constant.length,
                             alignment: .center
                         )
+                        .onTapGesture {
+                            completion()
+                        }
                 }
             }
         }
@@ -75,9 +78,11 @@ struct FilterListView: View {
         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 90)
     }
 }
-//
-//struct FilterListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FilterListView()
-//    }
-//}
+
+struct FilterListView_Previews: PreviewProvider {
+    static var previews: some View {
+        FilterListView() {
+
+        }
+    }
+}

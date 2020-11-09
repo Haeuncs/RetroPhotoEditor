@@ -300,20 +300,21 @@ struct PhotoEditView: View {
                     Spacer()
                     if isFilterSelected {
                         FilterListView() {
-                            if let view = testView, let image = CIImage(image: view.asImage()) {
-                                let lutImage = UIImage(named: "film_default")!
-                                let filter = FilterColorCube(
-                                    name: "Filter",
-                                    identifier: "1",
-                                    lutImage: lutImage,
-                                    dimension: 64
-                                )
-
-                                let preview = PreviewFilterColorCube(sourceImage: image, filter: filter)
-
-                                self.image = UIImage(cgImage: preview.cgImage)
+                            guard let ciImage = CIImage(image: image)?.oriented(forExifOrientation: Int32(image.imageOrientation.exifOrientation)) else {
+                                return
                             }
+                            let lutImage = UIImage(named: "film_default")!
+                            print(lutImage.imageOrientation.rawValue)
+                            let filter = FilterColorCube(
+                                name: "Filter",
+                                identifier: "1",
+                                lutImage: lutImage,
+                                dimension: 64
+                            )
 
+                            let preview = PreviewFilterColorCube(sourceImage: ciImage, filter: filter)
+                            print(UIImage(cgImage: preview.cgImage).imageOrientation.rawValue)
+                            self.image = UIImage(cgImage: preview.cgImage)
                         }
                     }
                     HStack(spacing:0) {
