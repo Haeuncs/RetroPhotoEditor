@@ -220,6 +220,7 @@ struct PhotoEditView: View {
     @State var isPresented: Bool = false
     @State var isEffectPresented: Bool = false
     @State var currentSelectedSticker: Sticker? = nil
+    @State var isFilterSelected: Bool = false
 
     @State var image: UIImage
 
@@ -290,25 +291,32 @@ struct PhotoEditView: View {
                             self.isEffectPresented.toggle()
                         }
                         WindowsStyleButton(imageNamed: "icnFilter", text: "Filter") {
-                            if let view = testView, let image = CIImage(image: view.asImage()) {
-                                let lutImage = UIImage(named: "film_default")!
-                                let filter = FilterColorCube(
-                                  name: "Filter",
-                                  identifier: "1",
-                                  lutImage: lutImage,
-                                  dimension: 64
-                                )
-
-                                let preview = PreviewFilterColorCube(sourceImage: image, filter: filter)
-
-                                self.image = UIImage(cgImage: preview.cgImage)
-                            }
+                            isFilterSelected.toggle()
                         }
                     }
                     Spacer()
                         getStickerView(length: geometry.size.width - 4)
                             .background(RectSettings(rect: $testRect))
                     Spacer()
+                    if isFilterSelected {
+                        FilterListView(completion: { imageAsset in
+                            guard let ciImage = CIImage(image: customCameraViewModel.capturedImage!)?.oriented(forExifOrientation: Int32(customCameraViewModel.capturedImage!.imageOrientation.exifOrientation)) else {
+                                return
+                            }
+                            let lutImage = imageAsset.image
+                            let filter = FilterColorCube(
+                                name: "Filter",
+                                identifier: imageAsset.name,
+                                lutImage: lutImage,
+                                dimension: 64
+                            )
+                            let preview = PreviewFilterColorCube(sourceImage: ciImage, filter: filter)
+                            self.image = UIImage(cgImage: preview.cgImage)
+                        }, resetCompletion: {
+                            self.image = customCameraViewModel.capturedImage!
+                        })
+
+                    }
                     HStack(spacing:0) {
                         WindowsStyleButton(imageNamed: "icnTrash", text: "Delete All") {
                             gifhyEvent.stickers = []

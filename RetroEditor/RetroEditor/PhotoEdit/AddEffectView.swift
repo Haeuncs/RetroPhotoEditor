@@ -10,31 +10,6 @@ import SwiftUI
 import Combine
 import Sliders
 
-struct StickerCell: View {
-    var body: some View {
-        HStack(spacing: 0) {
-            Image("icnFish")
-                .resizable()
-                .padding(EdgeInsets(top: 13, leading: 13, bottom: 13, trailing: 13))
-        }
-        .frame(
-            minWidth: 0,
-            maxWidth: .infinity,
-            maxHeight: .infinity,
-            alignment: .center
-        )
-        .background(Color.Retro.gray4)
-        .windowsBorder()
-    }
-}
-
-
-struct StickerCell_Previews: PreviewProvider {
-    static var previews: some View {
-        StickerCell()
-    }
-}
-
 struct StickerTypeButton: View {
     var isSelected: Bool
     var text: String

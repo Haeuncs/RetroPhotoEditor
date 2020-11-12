@@ -109,12 +109,13 @@ private class PreviewView: UIView {
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
 
-        if nil != self.superview {
-            self.videoPreviewLayer.session = self.captureSession
-            self.videoPreviewLayer.videoGravity = .resizeAspectFill
-            self.captureSession?.startRunning()
+        if nil != superview {
+            videoPreviewLayer.session = self.captureSession
+            videoPreviewLayer.videoGravity = .resizeAspectFill
+            videoPreviewLayer.connection?.videoOrientation = .portrait
+            captureSession?.startRunning()
         } else {
-            self.captureSession?.stopRunning()
+            captureSession?.stopRunning()
         }
     }
 
