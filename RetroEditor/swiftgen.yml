@@ -26,9 +26,10 @@
    inputs:
      - RetroEditor/LUT/LUT.xcassets
    outputs:
-     - templateName: swift5
+     - templatePath: Haeun-Custom-xcassets.stencil
        params:
          forceProvidesNamespaces: true
+         allValues: true
        output: RetroEditor/LUT/LUT+Generated.swift
 
 

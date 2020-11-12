@@ -103,12 +103,93 @@ internal enum Asset {
     }
     internal static let filmDefault = ImageAsset(name: "LUT_pack/film_default")
   }
+
+  // swiftlint:disable trailing_comma
+  internal static let allImages: [ImageAsset] = [
+    LUTPack.ContrastFilters.highContrast,
+    LUTPack.ContrastFilters.lowContrast,
+    LUTPack.ContrastFilters.mediumHighContrast,
+    LUTPack.ContrastFilters.veryHighContrast,
+    LUTPack.ContrastFilters.veryLowContrast,
+    LUTPack.FilmPresets.agfaAdvantix100,
+    LUTPack.FilmPresets.agfaAdvantix200,
+    LUTPack.FilmPresets.agfaAdvantix400,
+    LUTPack.FilmPresets.agfaAgfachromeCtPrecisa100,
+    LUTPack.FilmPresets.agfaAgfachromeCtPrecisa200,
+    LUTPack.FilmPresets.agfaAgfachromeRsx2050,
+    LUTPack.FilmPresets.agfaAgfachromeRsx2100,
+    LUTPack.FilmPresets.agfaAgfachromeRsx2200,
+    LUTPack.FilmPresets.agfaAgfacolorFutura100Plus,
+    LUTPack.FilmPresets.agfaAgfacolorFutura200Plus,
+    LUTPack.FilmPresets.agfaAgfacolorFutura400Plus,
+    LUTPack.FilmPresets.agfaAgfacolorFuturaIi100Plus,
+    LUTPack.FilmPresets.agfaAgfacolorFuturaIi200Plus,
+    LUTPack.FilmPresets.agfaAgfacolorFuturaIi400Plus,
+    LUTPack.FilmPresets.agfaAgfacolorHdc100Plus,
+    LUTPack.FilmPresets.agfaAgfacolorHdc200Plus,
+    LUTPack.FilmPresets.agfaAgfacolorHdc400Plus,
+    LUTPack.FilmPresets.agfaAgfacolorOptimaIi100,
+    LUTPack.FilmPresets.agfaAgfacolorOptimaIi200,
+    LUTPack.FilmPresets.agfaAgfacolorVista050,
+    LUTPack.FilmPresets.agfaAgfacolorVista100,
+    LUTPack.FilmPresets.agfaAgfacolorVista200,
+    LUTPack.FilmPresets.agfaAgfacolorVista400,
+    LUTPack.FilmPresets.agfaAgfacolorVista800,
+    LUTPack.FilmPresets.eastmanDoubleXNeg12Min,
+    LUTPack.FilmPresets.eastmanDoubleXNeg4Min,
+    LUTPack.FilmPresets.eastmanDoubleXNeg5Min,
+    LUTPack.FilmPresets.eastmanDoubleXNeg6Min,
+    LUTPack.FilmPresets.fujifilmF125,
+    LUTPack.FilmPresets.fujifilmF250,
+    LUTPack.FilmPresets.fujifilmF400,
+    LUTPack.FilmPresets.fujifilmFci,
+    LUTPack.FilmPresets.fujifilmFp2900z,
+    LUTPack.FilmPresets.kodakDscs3151,
+    LUTPack.FilmPresets.kodakDscs3152,
+    LUTPack.FilmPresets.kodakDscs3153,
+    LUTPack.FilmPresets.kodakDscs3154,
+    LUTPack.FilmPresets.kodakDscs3155,
+    LUTPack.FilmPresets.kodakDscs3156,
+    LUTPack.FilmPresets.kodakEktachrome100,
+    LUTPack.FilmPresets.kodakEktachrome100Plus,
+    LUTPack.FilmPresets.kodakEktachrome320t,
+    LUTPack.FilmPresets.kodakEktachrome400x,
+    LUTPack.FilmPresets.kodakEktachrome64,
+    LUTPack.FilmPresets.kodakEktachrome64t,
+    LUTPack.FilmPresets.kodakEktachromeE100s,
+    LUTPack.FilmPresets.kodakGold100,
+    LUTPack.FilmPresets.kodakGold200,
+    LUTPack.FilmPresets.kodakKaf2001,
+    LUTPack.FilmPresets.kodakKaf3000,
+    LUTPack.FilmPresets.kodakKai0311,
+    LUTPack.FilmPresets.kodakKai0372,
+    LUTPack.FilmPresets.kodakKai1010,
+    LUTPack.FilmPresets.kodakKodachrome200,
+    LUTPack.FilmPresets.kodakKodachrome25,
+    LUTPack.FilmPresets.kodakKodachrome64,
+    LUTPack.FilmPresets.kodakMaxZoom800,
+    LUTPack.FilmPresets.kodakOptura981111,
+    LUTPack.FilmPresets.kodakOptura981111Slrr,
+    LUTPack.FilmPresets.kodakOptura981113,
+    LUTPack.FilmPresets.kodakOptura981114,
+    LUTPack.FilmPresets.kodakPorta400nc,
+    LUTPack.FilmPresets.kodakPorta400vc,
+    LUTPack.FilmPresets.kodakPorta800,
+    LUTPack.FilmPresets.kodakPortra100t,
+    LUTPack.FilmPresets.kodakPortra160nc,
+    LUTPack.FilmPresets.kodakPortra160vc,
+    LUTPack.WebcamPresets.webcamPreset1,
+    LUTPack.WebcamPresets.webcamPreset2,
+    LUTPack.WebcamPresets.webcamPreset3,
+    LUTPack.filmDefault,
+  ]
+  // swiftlint:enable trailing_comma
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
 
-internal struct ImageAsset {
+internal struct ImageAsset: Hashable {
   internal fileprivate(set) var name: String
 
   #if os(macOS)
@@ -152,11 +233,8 @@ internal extension ImageAsset.Image {
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    #if SWIFT_PACKAGE
-    return Bundle.module
-    #else
-    return Bundle(for: BundleToken.self)
-    #endif
+    Bundle(for: BundleToken.self)
   }()
 }
 // swiftlint:enable convenience_type
+
