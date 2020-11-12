@@ -21,9 +21,11 @@ PODS:
   - PINCache/Core (3.0.3):
     - PINOperation (~> 1.2.1)
   - PINOperation (1.2.1)
+  - SwiftGen (6.4.0)
 
 DEPENDENCIES:
   - Giphy
+  - SwiftGen
 
 SPEC REPOS:
   trunk:
@@ -32,6 +34,7 @@ SPEC REPOS:
     - libwebp
     - PINCache
     - PINOperation
+    - SwiftGen
 
 SPEC CHECKSUMS:
   DeepDiff: e5ae6c50d0321568e4508cec5930b9f10bb293fc
@@ -39,7 +42,8 @@ SPEC CHECKSUMS:
   libwebp: 946cb3063cea9236285f7e9a8505d806d30e07f3
   PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
   PINOperation: 00c935935f1e8cf0d1e2d6b542e75b88fc3e5e20
+  SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
 
-PODFILE CHECKSUM: 3f9a1e83ec3841e0a76b52fbc7ea48e57f624a83
+PODFILE CHECKSUM: b4324004ff798735ce82c645f060c3c194f1ca82
 
 COCOAPODS: 1.8.4

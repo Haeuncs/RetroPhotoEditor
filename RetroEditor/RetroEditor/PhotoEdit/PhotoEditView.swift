@@ -303,15 +303,13 @@ struct PhotoEditView: View {
                             guard let ciImage = CIImage(image: image)?.oriented(forExifOrientation: Int32(image.imageOrientation.exifOrientation)) else {
                                 return
                             }
-                            let lutImage = UIImage(named: "film_default")!
-                            print(lutImage.imageOrientation.rawValue)
+                            let lutImage = Asset.LUTPack.FilmPresets.agfaAgfacolorFuturaIi400Plus.image
                             let filter = FilterColorCube(
                                 name: "Filter",
                                 identifier: "1",
                                 lutImage: lutImage,
                                 dimension: 64
                             )
-
                             let preview = PreviewFilterColorCube(sourceImage: ciImage, filter: filter)
                             print(UIImage(cgImage: preview.cgImage).imageOrientation.rawValue)
                             self.image = UIImage(cgImage: preview.cgImage)
