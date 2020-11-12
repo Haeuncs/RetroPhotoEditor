@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct FilterCell: View {
+    @State var fileterImage: ImageAsset
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Image("icnFish")
+                Image(uiImage: fileterImage.image)
                     .resizable()
                     .scaledToFit()
                     .padding(EdgeInsets(
@@ -22,7 +23,32 @@ struct FilterCell: View {
                     ))
             }
             HStack {
-                Text("test")
+                Text(fileterImage.name)
+            }
+            .frame(
+                maxWidth: .infinity,
+                minHeight: 0,
+                maxHeight: 20,
+                alignment: .center
+            )
+            .windowsBorder(reverse: true)
+        }
+        .frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .center
+        )
+        .background(Color.Retro.gray4)
+        .windowsBorder()
+    }
+}
+
+struct FilterResetCell: View {
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack {
+                Text("원본")
             }
             .frame(
                 maxWidth: .infinity,
@@ -44,11 +70,12 @@ struct FilterCell: View {
 }
 
 
-struct StickerCell_Previews: PreviewProvider {
-    static var previews: some View {
-        FilterCell()
-    }
-}
+
+//struct StickerCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FilterCell()
+//    }
+//}
 
 struct FilterListView: View {
     enum Constant {
@@ -56,20 +83,25 @@ struct FilterListView: View {
         static let length: CGFloat = 90
     }
 
-    var completion: (() ->Void)
+    var completion: ((ImageAsset) ->Void)
+    var resetCompletion: (()->Void)
 
     var body: some View {
         ScrollView(.horizontal) {
             LazyHGrid(rows: [Constant.gridItem], spacing: 0) {
-                ForEach((0...999), id: \.self) { _ in
-                    FilterCell()
+                FilterResetCell()
+                    .onTapGesture {
+                        resetCompletion()
+                    }
+                ForEach(Asset.allImages, id: \.self) { imageAsset in
+                    FilterCell(fileterImage: imageAsset)
                         .frame(
                             width: Constant.length,
                             height: Constant.length,
                             alignment: .center
                         )
                         .onTapGesture {
-                            completion()
+                            completion(imageAsset)
                         }
                 }
             }
@@ -79,10 +111,10 @@ struct FilterListView: View {
     }
 }
 
-struct FilterListView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilterListView() {
-
-        }
-    }
-}
+//struct FilterListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FilterListView() {
+//
+//        }
+//    }
+//}

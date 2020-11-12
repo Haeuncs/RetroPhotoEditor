@@ -299,21 +299,23 @@ struct PhotoEditView: View {
                             .background(RectSettings(rect: $testRect))
                     Spacer()
                     if isFilterSelected {
-                        FilterListView() {
-                            guard let ciImage = CIImage(image: image)?.oriented(forExifOrientation: Int32(image.imageOrientation.exifOrientation)) else {
+                        FilterListView(completion: { imageAsset in
+                            guard let ciImage = CIImage(image: customCameraViewModel.capturedImage!)?.oriented(forExifOrientation: Int32(customCameraViewModel.capturedImage!.imageOrientation.exifOrientation)) else {
                                 return
                             }
-                            let lutImage = Asset.LUTPack.FilmPresets.agfaAgfacolorFuturaIi400Plus.image
+                            let lutImage = imageAsset.image
                             let filter = FilterColorCube(
                                 name: "Filter",
-                                identifier: "1",
+                                identifier: imageAsset.name,
                                 lutImage: lutImage,
                                 dimension: 64
                             )
                             let preview = PreviewFilterColorCube(sourceImage: ciImage, filter: filter)
-                            print(UIImage(cgImage: preview.cgImage).imageOrientation.rawValue)
                             self.image = UIImage(cgImage: preview.cgImage)
-                        }
+                        }, resetCompletion: {
+                            self.image = customCameraViewModel.capturedImage!
+                        })
+
                     }
                     HStack(spacing:0) {
                         WindowsStyleButton(imageNamed: "icnTrash", text: "Delete All") {
