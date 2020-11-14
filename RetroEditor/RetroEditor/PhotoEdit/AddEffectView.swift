@@ -38,6 +38,7 @@ struct StickerTypeButton: View {
 
     }
 }
+
 struct AddEffectView: View {
 
     @Environment(\.presentationMode) var presentationMode
