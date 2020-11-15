@@ -26,12 +26,20 @@
    inputs:
      - RetroEditor/LUT/LUT.xcassets
    outputs:
-     - templatePath: Haeun-Custom-xcassets.stencil
+     - templatePath: SwiftGenTemplate/Haeun-Custom-xcassets.stencil
        params:
          forceProvidesNamespaces: true
          allValues: true
        output: RetroEditor/LUT/LUT+Generated.swift
 
+ xcassets:
+   inputs:
+     - RetroEditor/Resources/Assets.xcassets
+   outputs:
+     - templatePath: SwiftGenTemplate/Haeun-Custom-xcasets-withoutStruct.stencil
+       params:
+         forceProvidesNamespaces: true
+       output: RetroEditor/Resources/Assets+Generated.swift
 
 ## Generate constants for your storyboards and XIBs.
 ##   This one generates 2 output files, one containing the storyboard scenes, and another for the segues.

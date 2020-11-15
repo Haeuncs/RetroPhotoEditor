@@ -11,11 +11,19 @@ import SwiftUI
 struct WindowsStyleButton: View {
 
     let action: (() -> Void)?
-    let imageNamed: String?
+    let icnImage: UIImage?
     let text: String
-    init(imageNamed: String? = nil, text: String, action: (() -> Void)? = nil) {
-        self.imageNamed = imageNamed
+    let isSelected: Bool
+
+    init(
+        image: UIImage? = nil,
+        text: String,
+        isSelected: Bool = false,
+        action: (() -> Void)? = nil
+    ) {
+        self.icnImage = image
         self.text = text
+        self.isSelected = isSelected
         self.action = action
     }
 
@@ -26,8 +34,8 @@ struct WindowsStyleButton: View {
             VStack {
                 Spacer()
                 VStack(spacing: 5) {
-                    if let image = imageNamed {
-                        Image(image)
+                    if let image = icnImage {
+                        Image(uiImage: image)
                             .resizable()
                             .renderingMode(.original)
                             .frame(width: 26, height: 26, alignment: .center)
@@ -44,14 +52,14 @@ struct WindowsStyleButton: View {
                 maxHeight: 62,
                 alignment: .center
             )
-                .background(Color.Retro.gray3)
-                .windowsBorder()
+            .background(isSelected ? Color.Retro.gray3 : Color.Retro.gray4)
+            .windowsBorder(reverse: isSelected)
         }
     }
 }
 
 struct WindowsStyleButton_Previews: PreviewProvider {
     static var previews: some View {
-        WindowsStyleButton(imageNamed: "icnCrop", text: "Crop")
+        WindowsStyleButton(image: UIImage.icnCrop, text: "Crop")
     }
 }

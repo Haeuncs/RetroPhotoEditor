@@ -39,21 +39,11 @@ struct StickerTypeButton: View {
     }
 }
 
-struct AddEffectView: View {
-
+struct SelectStickerView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @Binding var isPresented: Bool
     @State var viewScale: ViewScale = .minimize
-
-    @State var scrollPosition = 0.0
-    private var gridItemLayout = [
-        GridItem(.flexible(), spacing: 0),
-        GridItem(.flexible(), spacing: 0),
-        GridItem(.flexible(), spacing: 0),
-        GridItem(.flexible(), spacing: 0),
-        GridItem(.flexible(), spacing: 0)
-    ]
 
     @ObservedObject var gifhyEvent: GifhyViewModel
 

@@ -15,13 +15,40 @@ class CustomCameraViewModel: ObservableObject {
 }
 
 struct CustomCameraView: View {
+    class CustomCameraSheetNavigator: ObservableObject {
+        enum Destination {
+            case Sticker(viewModel: CustomCameraViewModel)
+            case Album(completion: ((UIImage) -> Void))
+        }
+
+        @Published var showSheet = false
+        var sheetDesitination: Destination? = .none {
+            didSet {
+                showSheet = true
+            }
+        }
+
+        func sheetView() -> AnyView? {
+            switch sheetDesitination {
+            case .Album(let completion):
+                return AnyView(ImagePicker(completion: completion))
+            case .Sticker(let viewModel):
+                let photoEditView = PhotoEditView(
+                        image: viewModel.capturedImage!,
+                        customCameraViewModel: viewModel
+                )
+                return AnyView(photoEditView)
+            case .none:
+                return nil
+            }
+        }
+    }
+    
     @ObservedObject var events = CameraObject()
     @ObservedObject var viewModel = CustomCameraViewModel()
+    @ObservedObject var sheetNavigator = CustomCameraSheetNavigator()
 
     @State var didTapCapture: Bool = false
-    @State var presentSticker: Bool = false
-    @State var didTapAlbum: Bool = false
-
     @State var didSelectedImage: Image?
     
     var body: some View {
@@ -29,15 +56,13 @@ struct CustomCameraView: View {
             VStack(spacing: 0) {
                 NavigationView()
                 HStack(spacing:0) {
-                    WindowsStyleButton(imageNamed: "icnAlbum", text: "Open Album") {
-                        self.didTapAlbum = true
-                    }
-                    .sheet(isPresented: $didTapAlbum) {
-                        ImagePicker() { image in
+                    WindowsStyleButton(image: UIImage.icnAlbum, text: "Open Album") {
+                        let completion = { image in
                             viewModel.capturedImage = image
                         }
+                        sheetNavigator.sheetDesitination = .Album(completion: completion)
                     }
-                    WindowsStyleButton(imageNamed: "icnCrop", text: "Ratio")
+                    WindowsStyleButton(image: UIImage.icnCrop, text: "Ratio")
                 }
                 VStack() {
                     Spacer()
@@ -50,30 +75,29 @@ struct CustomCameraView: View {
                             delegate: self,
                             events: events
                         )
-                            .frame(width: geometry.size.width - 4, height: geometry.size.width - 4, alignment: .center)
+                        .frame(width: geometry.size.width - 4, height: geometry.size.width - 4, alignment: .center)
                     }
                     Spacer()
                 }
                 HStack(spacing:0) {
                     if viewModel.capturedImage == nil {
-                        WindowsStyleButton(imageNamed: "icnCamera", text: "Capture") {
+                        WindowsStyleButton(image: UIImage.icnCamera, text: "Capture") {
                             events.didTapCapture = true
-                            print("didTap")
                         }
                     } else {
-                        WindowsStyleButton(imageNamed: "icnRetry", text: "Retry") {
+                        WindowsStyleButton(image: UIImage.icnRetry, text: "Retry") {
                             viewModel.capturedImage = nil
                         }
-                        WindowsStyleButton(imageNamed: "icnPoison", text: "Done") {
-                            presentSticker = !presentSticker
-                        }
-                        .fullScreenCover(isPresented: $presentSticker) {
-                            PhotoEditView(image: viewModel.capturedImage!, customCameraViewModel: viewModel)
+                        WindowsStyleButton(image: UIImage.icnPoison, text: "Done") {
+                            sheetNavigator.sheetDesitination = .Sticker(viewModel: self.viewModel)
                         }
                         .frame(maxWidth: 100, maxHeight: 62, alignment: .center)
                     }
                 }
             }
+            .fullScreenCover(isPresented: $sheetNavigator.showSheet, content: {
+                sheetNavigator.sheetView()
+            })
             .background(Color.Retro.gray4)
             .windowsBorder()
         }
@@ -103,28 +127,6 @@ extension CustomCameraView: CameraViewDelegate {
     }
 }
 
-struct CaptureButtonView: View {
-    @State private var animationAmount: CGFloat = 1
-    var body: some View {
-        Image(systemName: "video").font(.largeTitle)
-            .padding(30)
-            .background(Color.red)
-            .foregroundColor(.white)
-            .clipShape(Circle())
-            .overlay(
-                Circle()
-                    .stroke(Color.red)
-                    .scaleEffect(animationAmount)
-                    .opacity(Double(2 - animationAmount))
-                    .animation(Animation.easeOut(duration: 1)
-                        .repeatForever(autoreverses: false))
-        )
-            .onAppear
-            {
-                self.animationAmount = 2
-        }
-    }
-}
 //
 //struct SwiftUIView_Previews: PreviewProvider {
 //    static var previews: some View {

@@ -103,10 +103,18 @@ struct PhotoEditView: View {
                         self.presentationMode.wrappedValue.dismiss()
                     }
                     HStack(spacing:0) {
-                        WindowsStyleButton(imageNamed: "icnFish", text: "Sticker") {
-                            self.isEffectPresented.toggle()
+                        WindowsStyleButton(
+                            image: UIImage.icnFish,
+                            text: "Sticker",
+                            isSelected: isEffectPresented
+                        ) {
+                            isEffectPresented.toggle()
                         }
-                        WindowsStyleButton(imageNamed: "icnFilter", text: "Filter") {
+                        WindowsStyleButton(
+                            image: UIImage.icnFilter,
+                            text: "Filter",
+                            isSelected: isFilterSelected
+                        ) {
                             isFilterSelected.toggle()
                         }
                     }
@@ -134,10 +142,16 @@ struct PhotoEditView: View {
 
                     }
                     HStack(spacing:0) {
-                        WindowsStyleButton(imageNamed: "icnTrash", text: "Delete All") {
+                        WindowsStyleButton(
+                            image: UIImage.icnTrash,
+                            text: "Delete All"
+                        ) {
                             gifhyEvent.stickers = []
                         }
-                        WindowsStyleButton(imageNamed: "icnDisk", text: "Save") {
+                        WindowsStyleButton(
+                            image: UIImage.icnDisk,
+                            text: "Save"
+                        ) {
                             currentSelectedSticker = nil
                             if let image = UIApplication.shared.windows[0].rootViewController?.presentedViewController?.view.setImage(rect: self.testRect) {
                                 let imageSaver = ImageSaver(imageSaveSuccessed: $imageSaveSuccessed)
@@ -150,7 +164,7 @@ struct PhotoEditView: View {
                 .windowsBorder()
             }
             if isEffectPresented {
-                AddEffectView(isPresented: $isEffectPresented, events: gifhyEvent)
+                SelectStickerView(isPresented: $isEffectPresented, events: gifhyEvent)
             }
             if imageSaveSuccessed {
                 AlertView(dismiss: $imageSaveSuccessed, title: "저장 성공", leftText: "완료", leftCompletion: {
