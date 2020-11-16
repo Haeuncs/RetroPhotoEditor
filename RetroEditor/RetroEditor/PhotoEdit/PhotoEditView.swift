@@ -32,16 +32,17 @@ class ImageSaver: NSObject {
 struct PhotoEditView: View {
     @Environment(\.presentationMode) var presentationMode
 
-    @State var imageSaveSuccessed = false
-    @State var isPresented: Bool = false
-    @State var isEffectPresented: Bool = false
+    @State var isPresented: Bool = true
+
+    @State var showImageSavedSuccess = false
+    @State var showStickerView: Bool = false
+    @State var showFilterView: Bool = false
+
     @State var currentSelectedSticker: Sticker? = nil
-    @State var isFilterSelected: Bool = false
 
     @State var image: UIImage
+    @State var captureArea: CGRect = .zero
 
-    @State var testView: AnyView?
-    @State var testRect: CGRect = .zero
     @ObservedObject var gifhyEvent = GifhyViewModel(search: GifhySearch(query: "", mediaType: .stickers))
     @ObservedObject var customCameraViewModel: CustomCameraViewModel
 
@@ -88,9 +89,6 @@ struct PhotoEditView: View {
             height: length,
             alignment: .center
         )
-        .onAppear {
-            testView = AnyView(view)
-        }
 
         return AnyView(wrapperView)
     }
@@ -106,23 +104,23 @@ struct PhotoEditView: View {
                         WindowsStyleButton(
                             image: UIImage.icnFish,
                             text: "Sticker",
-                            isSelected: isEffectPresented
+                            isSelected: showStickerView
                         ) {
-                            isEffectPresented.toggle()
+                            showStickerView.toggle()
                         }
                         WindowsStyleButton(
                             image: UIImage.icnFilter,
                             text: "Filter",
-                            isSelected: isFilterSelected
+                            isSelected: showFilterView
                         ) {
-                            isFilterSelected.toggle()
+                            showFilterView.toggle()
                         }
                     }
                     Spacer()
                         getStickerView(length: geometry.size.width - 4)
-                            .background(RectSettings(rect: $testRect))
+                            .background(RectSettings(rect: $captureArea))
                     Spacer()
-                    if isFilterSelected {
+                    if showFilterView {
                         FilterListView(completion: { imageAsset in
                             guard let ciImage = CIImage(image: customCameraViewModel.capturedImage!)?.oriented(forExifOrientation: Int32(customCameraViewModel.capturedImage!.imageOrientation.exifOrientation)) else {
                                 return
@@ -153,8 +151,8 @@ struct PhotoEditView: View {
                             text: "Save"
                         ) {
                             currentSelectedSticker = nil
-                            if let image = UIApplication.shared.windows[0].rootViewController?.presentedViewController?.view.setImage(rect: self.testRect) {
-                                let imageSaver = ImageSaver(imageSaveSuccessed: $imageSaveSuccessed)
+                            if let image = UIApplication.shared.windows[0].rootViewController?.presentedViewController?.view.setImage(rect: self.captureArea) {
+                                let imageSaver = ImageSaver(imageSaveSuccessed: $showImageSavedSuccess)
                                 imageSaver.writeToPhotoAlbum(image: image)
                             }
                         }
@@ -163,14 +161,21 @@ struct PhotoEditView: View {
                 .background(Color.Retro.gray4)
                 .windowsBorder()
             }
-            if isEffectPresented {
-                SelectStickerView(isPresented: $isEffectPresented, events: gifhyEvent)
+            if showStickerView {
+                SelectStickerView(isPresented: $showStickerView, events: gifhyEvent)
             }
-            if imageSaveSuccessed {
-                AlertView(dismiss: $imageSaveSuccessed, title: "저장 성공", leftText: "완료", leftCompletion: {
-                    presentationMode.wrappedValue.dismiss()
-                    customCameraViewModel.capturedImage = nil
-                }, rightText: nil, rightCompletion: nil)
+            if showImageSavedSuccess {
+                AlertView(
+                    dismiss: $showImageSavedSuccess,
+                    title: "저장 성공",
+                    leftText: "완료",
+                    leftCompletion: {
+                        presentationMode.wrappedValue.dismiss()
+                        customCameraViewModel.capturedImage = nil
+                    },
+                    rightText: nil,
+                    rightCompletion: nil
+                )
             }
         }
     }
