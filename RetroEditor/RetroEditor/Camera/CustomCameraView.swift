@@ -9,6 +9,7 @@
 
 import SwiftUI
 import AVFoundation
+import Combine
 
 class CustomCameraViewModel: ObservableObject {
     @Published var capturedImage: UIImage?
@@ -54,7 +55,7 @@ struct CustomCameraView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                NavigationView()
+                NavigationView(isActiveView: .constant(true), closeButtonAction: nil)
                 HStack(spacing:0) {
                     WindowsStyleButton(image: UIImage.icnAlbum, text: "Open Album") {
                         let completion = { image in
@@ -95,12 +96,12 @@ struct CustomCameraView: View {
                     }
                 }
             }
-            .fullScreenCover(isPresented: $sheetNavigator.showSheet, content: {
-                sheetNavigator.sheetView()
-            })
             .background(Color.Retro.gray4)
             .windowsBorder()
         }
+        .fullScreenCover(isPresented: $sheetNavigator.showSheet, content: {
+            sheetNavigator.sheetView()
+        })
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 import PixelEngine
 
 class ImageSaver: NSObject {
@@ -29,14 +30,29 @@ class ImageSaver: NSObject {
     }
 }
 
+// 근데 이게 뷰모델임..?
+class PhotoEditViewModel: ObservableObject {
+    @Published var showImageSavedSuccess = false
+    @Published var showStickerView: Bool = false
+    @Published var showFilterView: Bool = false
+    @Published var isPresented: Bool = false
+
+    var cancelBag = [AnyCancellable]()
+
+    deinit {
+        print("deinit")
+    }
+
+    init() {
+        Publishers.CombineLatest($showStickerView, $showImageSavedSuccess)
+            .map { ($0 == false) && ($1 == false) }
+            .assign(to: \.isPresented, on: self)
+            .store(in: &cancelBag)
+    }
+}
+
 struct PhotoEditView: View {
     @Environment(\.presentationMode) var presentationMode
-
-    @State var isPresented: Bool = true
-
-    @State var showImageSavedSuccess = false
-    @State var showStickerView: Bool = false
-    @State var showFilterView: Bool = false
 
     @State var currentSelectedSticker: Sticker? = nil
 
@@ -45,7 +61,7 @@ struct PhotoEditView: View {
 
     @ObservedObject var gifhyEvent = GifhyViewModel(search: GifhySearch(query: "", mediaType: .stickers))
     @ObservedObject var customCameraViewModel: CustomCameraViewModel
-
+    @ObservedObject var viewModel = PhotoEditViewModel()
 
     init(image: UIImage, customCameraViewModel: CustomCameraViewModel) {
         self._image = State(initialValue: image)
@@ -96,41 +112,40 @@ struct PhotoEditView: View {
     func saveDidTap() {
         currentSelectedSticker = nil
         if let image = UIApplication.shared.windows[0].rootViewController?.presentedViewController?.view.setImage(rect: self.captureArea) {
-            let imageSaver = ImageSaver(imageSaveSuccessed: $showImageSavedSuccess)
+            let imageSaver = ImageSaver(imageSaveSuccessed: $viewModel.showImageSavedSuccess)
             imageSaver.writeToPhotoAlbum(image: image)
         }
     }
 
     // TODO: 필터 적용된 이미지가 combine 같은걸로 작동되도록 변경해야함..
-    
     var body: some View {
         ZStack {
             GeometryReader { geometry in
                 VStack(spacing: 0) {
-                    NavigationView(isActiveView: self.$isPresented) {
+                    NavigationView(isActiveView: $viewModel.isPresented) {
                         self.presentationMode.wrappedValue.dismiss()
                     }
                     HStack(spacing:0) {
                         WindowsStyleButton(
                             image: UIImage.icnFish,
                             text: "Sticker",
-                            isSelected: showStickerView
+                            isSelected: viewModel.showStickerView
                         ) {
-                            showStickerView.toggle()
+                            viewModel.showStickerView.toggle()
                         }
                         WindowsStyleButton(
                             image: UIImage.icnFilter,
                             text: "Filter",
-                            isSelected: showFilterView
+                            isSelected: viewModel.showFilterView
                         ) {
-                            showFilterView.toggle()
+                            viewModel.showFilterView.toggle()
                         }
                     }
                     Spacer()
                         getStickerView(length: geometry.size.width - 4)
                             .background(RectSettings(rect: $captureArea))
                     Spacer()
-                    if showFilterView {
+                    if viewModel.showFilterView {
                         FilterListView(completion: { imageAsset in
                             guard let ciImage = CIImage(image: customCameraViewModel.capturedImage!)?.oriented(forExifOrientation: Int32(customCameraViewModel.capturedImage!.imageOrientation.exifOrientation)) else {
                                 return
@@ -167,12 +182,12 @@ struct PhotoEditView: View {
                 .background(Color.Retro.gray4)
                 .windowsBorder()
             }
-            if showStickerView {
-                SelectStickerView(isPresented: $showStickerView, events: gifhyEvent)
+            if viewModel.showStickerView {
+                SelectStickerView(isPresented: $viewModel.showStickerView, events: gifhyEvent)
             }
-            if showImageSavedSuccess {
+            if viewModel.showImageSavedSuccess {
                 AlertView(
-                    dismiss: $showImageSavedSuccess,
+                    dismiss: $viewModel.showImageSavedSuccess,
                     title: "저장 성공",
                     leftText: "완료",
                     leftCompletion: {

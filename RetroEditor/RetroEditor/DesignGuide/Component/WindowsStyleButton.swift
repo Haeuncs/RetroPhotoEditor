@@ -41,7 +41,8 @@ struct WindowsStyleButton: View {
                             .frame(width: 26, height: 26, alignment: .center)
                     }
                     Text(text)
-                        .font(Font.system(size: 14))
+                        .font(Font.system(size: 14, weight: .bold, design: .default))
+                        .foregroundColor(Color.Retro.darkGray)
                         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
                 Spacer()
@@ -52,7 +53,7 @@ struct WindowsStyleButton: View {
                 maxHeight: 62,
                 alignment: .center
             )
-            .background(isSelected ? Color.Retro.gray3 : Color.Retro.gray4)
+            .background(isSelected ? Color.Retro.gray4 : Color.Retro.gray3)
             .windowsBorder(reverse: isSelected)
         }
     }

@@ -25,6 +25,8 @@ struct StickerTypeButton: View {
             completion()
         }) {
             Text(text)
+                .font(Font.system(size: 14, weight: .bold, design: .default))
+                .foregroundColor(Color.Retro.darkGray)
         }
         .frame(
             minWidth: 0,
@@ -33,7 +35,7 @@ struct StickerTypeButton: View {
             maxHeight: 42,
             alignment: .center
         )
-        .background(isSelected ? Color.Retro.gray3 : Color.Retro.gray4)
+        .background(isSelected ? Color.Retro.gray4 : Color.Retro.gray3)
         .windowsBorder(reverse: isSelected)
 
     }
