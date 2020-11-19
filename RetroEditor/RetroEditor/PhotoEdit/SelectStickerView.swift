@@ -25,6 +25,8 @@ struct StickerTypeButton: View {
             completion()
         }) {
             Text(text)
+                .font(Font.system(size: 14, weight: .bold, design: .default))
+                .foregroundColor(Color.Retro.darkGray)
         }
         .frame(
             minWidth: 0,
@@ -33,26 +35,17 @@ struct StickerTypeButton: View {
             maxHeight: 42,
             alignment: .center
         )
-        .background(isSelected ? Color.Retro.gray3 : Color.Retro.gray4)
+        .background(isSelected ? Color.Retro.gray4 : Color.Retro.gray3)
         .windowsBorder(reverse: isSelected)
 
     }
 }
-struct AddEffectView: View {
 
+struct SelectStickerView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @Binding var isPresented: Bool
     @State var viewScale: ViewScale = .minimize
-
-    @State var scrollPosition = 0.0
-    private var gridItemLayout = [
-        GridItem(.flexible(), spacing: 0),
-        GridItem(.flexible(), spacing: 0),
-        GridItem(.flexible(), spacing: 0),
-        GridItem(.flexible(), spacing: 0),
-        GridItem(.flexible(), spacing: 0)
-    ]
 
     @ObservedObject var gifhyEvent: GifhyViewModel
 
