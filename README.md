@@ -1,10 +1,14 @@
 # What it is?
 
-windows95 때의 느낌으로 사진을 편집하는 iOS App
+## Photo Editor iOS App
 
-# Design concept
+This app is not complete.
 
-![concept](./Images/DesignConcept.png)
+All functions work perfectly but the code is dirty. 💩
+
+# Screen
+
+![Screen](./Images/Image.png)
 
 
 ![Style guide](./Images/StyleGuide.png)
