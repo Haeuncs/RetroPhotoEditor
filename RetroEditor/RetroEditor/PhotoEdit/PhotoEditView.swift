@@ -117,7 +117,6 @@ struct PhotoEditView: View {
         }
     }
 
-    // TODO: 필터 적용된 이미지가 combine 같은걸로 작동되도록 변경해야함..
     var body: some View {
         ZStack {
             GeometryReader { geometry in
