@@ -9,6 +9,7 @@
 import SwiftUI
 import Combine
 import PixelEngine
+import MobileCoreServices
 
 class ImageSaver: NSObject {
     @Binding var imageSaveSuccessed: Bool
@@ -48,6 +49,31 @@ class PhotoEditViewModel: ObservableObject {
             .map { ($0 == false) && ($1 == false) }
             .assign(to: \.isPresented, on: self)
             .store(in: &cancelBag)
+    }
+
+    func createGIF(with images: [UIImage], loopCount: Int = 0, frameDelay: Double, callback: (_ data: NSData?, _ error: NSError?) -> ()) {
+        let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: loopCount]] as? CFDictionary
+        let frameProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: frameDelay]] as? CFDictionary
+
+        let documentsDirectory = NSTemporaryDirectory()
+        let url = NSURL(fileURLWithPath: documentsDirectory).appendingPathComponent("animated.gif")
+
+        if let url = url {
+            let destination = CGImageDestinationCreateWithURL(url as CFURL, kUTTypeGIF, Int(UInt(images.count)), nil)
+            CGImageDestinationSetProperties(destination!, fileProperties)
+
+            for i in 0..<images.count {
+                CGImageDestinationAddImage(destination!, images[i].cgImage!, frameProperties)
+            }
+
+            if CGImageDestinationFinalize(destination!) {
+                callback(NSData(contentsOf: url), nil)
+            } else {
+                callback(nil, NSError())
+            }
+        } else  {
+            callback(nil, NSError())
+        }
     }
 }
 
