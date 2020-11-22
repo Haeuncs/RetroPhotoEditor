@@ -52,8 +52,8 @@ class PhotoEditViewModel: ObservableObject {
     }
 
     func createGIF(with images: [UIImage], loopCount: Int = 0, frameDelay: Double, callback: (_ data: NSData?, _ error: NSError?) -> ()) {
-        let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: loopCount]] as? CFDictionary
-        let frameProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: frameDelay]] as? CFDictionary
+        let fileProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: loopCount]] as CFDictionary
+        let frameProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: frameDelay]] as CFDictionary
 
         let documentsDirectory = NSTemporaryDirectory()
         let url = NSURL(fileURLWithPath: documentsDirectory).appendingPathComponent("animated.gif")
